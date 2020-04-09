@@ -20,3 +20,4 @@ Recipe.create(name: "Lemon Turmeric Cake",
                 url: "https://cooking.nytimes.com/recipes/1020637-lemony-turmeric-tea-cake",
                 img_url: "https://static01.nyt.com/images/2019/11/26/dining/ar-lemony-turmeric-tea-cake/merlin_165035286_7fd1d30a-adce-4f81-b363-9066f36471fe-articleLarge.jpg"
                 )
+               
