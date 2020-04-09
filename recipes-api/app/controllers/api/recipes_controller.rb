@@ -4,7 +4,7 @@ class Api::RecipesController < ApplicationController
   #GET/recipes
   def index
     recipes = Recipe.all 
-    render json: recipes 
+    render json: recipes, include: [:notes]
   end #index
 
   #GET/recipes/1

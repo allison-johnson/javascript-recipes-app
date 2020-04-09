@@ -1,5 +1,8 @@
 Recipe.destroy_all
+Note.destroy_all
+
 Recipe.reset_pk_sequence
+Note.reset_pk_sequence 
 
 Recipe.create(name: "Chicken Soup", 
                 url: "https://thepioneerwoman.com/cooking/chunky-chicken-soup/", 
@@ -20,4 +23,13 @@ Recipe.create(name: "Lemon Turmeric Cake",
                 url: "https://cooking.nytimes.com/recipes/1020637-lemony-turmeric-tea-cake",
                 img_url: "https://static01.nyt.com/images/2019/11/26/dining/ar-lemony-turmeric-tea-cake/merlin_165035286_7fd1d30a-adce-4f81-b363-9066f36471fe-articleLarge.jpg"
                 )
+
+Note.create([
+    {content: "Great recipe, but definitely cut back on the salt", recipe_id: 1},
+    {content: "A British classic, might sound strange if you've never had it but it's SO delicious!", recipe_id: 2},
+    {content: "A must-try for fans of the Great British Baking Show!", recipe_id: 2},
+    {content: "These are so good, cut back on the hot sauce if your kids don't love spicy food", recipe_id: 3},
+    {content: "The turmeric is really only for color (which is a beautiful yellow!)", recipe_id: 4},
+    {content: "This cake was moist and delicious for a good 3 days", recipe_id: 4}
+])
                
