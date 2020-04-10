@@ -42,10 +42,9 @@ function renderRecipes(recipes) {
 
 function renderNoteForm(e) {
   //e.target.id = "add-note-btn-4"
-  let recipeId = parseInt(e.target.id.split("-")[-1]);
+  //let recipeId = e.target.id.split("-")[-1];
   e.target.parentNode.innerHTML += `
      <form class="new-note-form">
-       <input type="hidden" name="recipe-id" value=recipeId>
        <label for="note">Enter recipe note: </label>
        <input type="text" name="note">
        <input type="submit" id="submit-note" value=&#10004;>
@@ -58,7 +57,16 @@ function renderNoteForm(e) {
 
 function createNoteFromForm(e) {
   e.preventDefault();
-  //
+
+  //DOM Getters
+  const noteContent = e.target.note.value;
+  const wordArr = e.target.parentNode.id.split(" ");
+  const recipeId = wordArr[wordArr.length-1];
+  debugger 
+
+  //Formulate strong params
+
+  //Fetch request
 
 }
 
