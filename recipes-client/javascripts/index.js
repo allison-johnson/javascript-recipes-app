@@ -7,13 +7,11 @@ document.addEventListener('DOMContentLoaded', function() {
 let recipes = [];
 
 //DOM Getters
-const getRecipesList = () => document.querySelector('div.recipes-list');
-const getForm = () => document.getElementById('recipe-form')
-const getName = () => document.getElementById('name').value
-const getURL = () => document.getElementById('url').value
-const getImgURL = () => document.getElementById('img_url').value
-//const getAddNoteButtons = () => document.getElementsByClassName('add-note-btn');
-//const getRecipeNotesList = () => 
+let getRecipesList = () => document.querySelector('div.recipes-list');
+let getForm = () => document.getElementById('recipe-form')
+let getName = () => document.getElementById('name').value
+let getURL = () => document.getElementById('url').value
+let getImgURL = () => document.getElementById('img_url').value
 
 function getRecipes() {
   //fetch sends a GET request by default
@@ -36,30 +34,35 @@ function renderRecipes(recipes) {
   //When clicked, button should generate new text field and submit button
   buttons = document.getElementsByClassName("add-note-btn")
   for (let i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener("click", renderNoteForm)
+    buttons[i].addEventListener("click", function(e) {
+        renderNoteForm(e);
+    })
   }
 }//renderRecipes
 
 function renderNoteForm(e) {
-  e.target.parentNode.innerHTML += `
+  e.target.parentNode.insertAdjacentHTML("beforeend", `
      <form class="new-note-form">
        <label for="note">Enter recipe note: </label>
        <input type="text" name="note">
        <input type="submit" id="submit-note" value=&#10004;>
      </form>
-  `
+  `);
   allNewNoteForms = document.getElementsByClassName("new-note-form");
   lastNewNoteForm = allNewNoteForms.item(allNewNoteForms.length-1);
-  lastNewNoteForm.addEventListener("submit", createNoteFromForm)
+  lastNewNoteForm.addEventListener("submit", function(e){
+      createNoteFromForm(e);
+  })
 }
 
 function createNoteFromForm(e) {
+  console.log("Inside createNoteFromForm");
   e.preventDefault();
 
   //DOM Getters
-  const noteContent = e.target.note.value;
-  const wordArr = e.target.parentNode.id.split(" ");
-  const recipeId = parseInt(wordArr[wordArr.length-1]);
+  let noteContent = e.target.note.value;
+  let wordArr = e.target.parentNode.id.split(" ");
+  let recipeId = parseInt(wordArr[wordArr.length-1]);
 
   //Formulate strong params
   let strongParams = {
@@ -80,12 +83,17 @@ function createNoteFromForm(e) {
   })
   .then(resp => resp.json())
   .then(note => {
+      //Add new note to ul for that recipe's card
       ul = document.getElementById(`recipe-notes-${note.recipe_id}`)
       li = document.createElement('li');
       li.innerText = note.content;
       ul.appendChild(li);
-  });
 
+      //Remove form from DOM
+      newNoteForms = document.getElementsByClassName("new-note-form")
+      mostRecent = newNoteForms[newNoteForms.length-1];
+      mostRecent.parentNode.removeChild(mostRecent);
+  });
 }
 
 function renderRecipe(r) {
@@ -139,9 +147,9 @@ function createFromForm(e) {
     Add the recipe to the page */
   e.preventDefault();
 
-  const name = getName();
-  const url = getURL();
-  const imgURL = getImgURL();
+  let name = getName();
+  let url = getURL();
+  let imgURL = getImgURL();
 
   let strongParams = {
     recipe: {

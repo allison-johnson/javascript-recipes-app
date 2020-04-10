@@ -6,8 +6,6 @@ Substance
 
 [x] Form to submit new recipe
 
-[] Fix conflicting id names!!!
-
 [] Clear fields when form is submitted
 
 [] Create an event controller that handles all clicks
@@ -31,7 +29,7 @@ Substance
 Style
 [] Styling of 'add recipe note' buttons
 [] New recipe form like in Toy Tale
-[] Format ul's
+[] Format ul's (maybe left align li's?)
 [] Center grid of cards
 [] Play around with existing card templates
 [] Limit number of notes that show at once (or allow user to scroll)
