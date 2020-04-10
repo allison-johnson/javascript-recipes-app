@@ -2,9 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
   //This should send AJAX request to Rails side to fetch all recipes information
   getRecipes();
   getForm().addEventListener('submit', createFromForm);
-  document.addEventListener('click', function(e){
-    console.log("Clicked on", e.target);
-  })
 })//DOMContentLoaded event listener 
 
 let recipes = [];
@@ -15,7 +12,7 @@ const getForm = () => document.getElementById('recipe-form')
 const getName = () => document.getElementById('name').value
 const getURL = () => document.getElementById('url').value
 const getImgURL = () => document.getElementById('img_url').value
-const getAddNoteButtons = () => document.getElementsByClassName('add-note-btn');
+//const getAddNoteButtons = () => document.getElementsByClassName('add-note-btn');
 //const getRecipeNotesList = () => 
 
 function getRecipes() {
@@ -29,17 +26,41 @@ function getRecipes() {
   })
   .then(function(data){
     recipes = data;
-    //console.log("Recipes: ", recipes)
     renderRecipes(recipes);
   })
 }//getRecipes
 
 function renderRecipes(recipes) {
   recipes.forEach(recipe => renderRecipe(recipe));
-  document.getElementById('1').addEventListener('click', function(event) {
-    console.log("Click event")
-  });
+
+  //When clicked, button should generate new text field and submit button
+  buttons = document.getElementsByClassName("add-note-btn")
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", renderNoteForm)
+  }
 }//renderRecipes
+
+function renderNoteForm(e) {
+  //e.target.id = "add-note-btn-4"
+  let recipeId = parseInt(e.target.id.split("-")[-1]);
+  e.target.parentNode.innerHTML += `
+     <form class="new-note-form">
+       <input type="hidden" name="recipe-id" value=recipeId>
+       <label for="note">Enter recipe note: </label>
+       <input type="text" name="note">
+       <input type="submit" id="submit-note" value=&#10004;>
+     </form>
+  `
+  allNewNoteForms = document.getElementsByClassName("new-note-form");
+  lastNewNoteForm = allNewNoteForms.item(allNewNoteForms.length-1);
+  lastNewNoteForm.addEventListener("submit", createNoteFromForm)
+}
+
+function createNoteFromForm(e) {
+  e.preventDefault();
+  //
+
+}
 
 function renderRecipe(r) {
   //Add HTML to an individual recipe's card to the recipes-list div
@@ -53,13 +74,13 @@ function renderRecipe(r) {
   addNoteButton.class = "btn"
   addNoteButton.classList.add("add-note-btn");
   addNoteButton.innerText = "Add a recipe note"
-  addNoteButton.id = r.id
+  addNoteButton.id = `add-note-btn-${r.id}`
   document.getElementById(`card ${r.id}`).appendChild(addNoteButton);
   //debugger
   //Need the text box for content of new note to appear dynamically when button clicked
-  addNoteButton.addEventListener('click', function(event) {
-      console.log("Click event")
-  });
+//   addNoteButton.addEventListener('click', function(event) {
+//       console.log("Click event")
+//   });
 
 }//renderRecipe
 
