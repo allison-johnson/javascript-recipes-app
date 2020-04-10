@@ -41,8 +41,6 @@ function renderRecipes(recipes) {
 }//renderRecipes
 
 function renderNoteForm(e) {
-  //e.target.id = "add-note-btn-4"
-  //let recipeId = e.target.id.split("-")[-1];
   e.target.parentNode.innerHTML += `
      <form class="new-note-form">
        <label for="note">Enter recipe note: </label>
@@ -82,12 +80,10 @@ function createNoteFromForm(e) {
   })
   .then(resp => resp.json())
   .then(note => {
-      console.log("Content from db: ", note.content)
-    // recipes.push(recipe);
-    // renderRecipe(recipe);
-    // document.getElementById('name').value = ""
-    // document.getElementById('url').value = ""
-    // document.getElementById('img_url').value = ""
+      ul = document.getElementById(`recipe-notes-${note.recipe_id}`)
+      li = document.createElement('li');
+      li.innerText = note.content;
+      ul.appendChild(li);
   });
 
 }
@@ -109,19 +105,20 @@ function renderRecipe(r) {
 }//renderRecipe
 
 function template(recipe) {
+    //id=${recipe.id} from ul
   return `
     <div class="card" id="card ${recipe.id}">
       <div class="card-content">
         <img class="recipe-img" src="${recipe.img_url}"/><br>
         <a href=${recipe.url} class="card-url">${recipe.name}</a>
-        <ul class="recipe-notes" id=${recipe.id}></ul>
+        <ul id="recipe-notes-${recipe.id}"></ul>
       </div>
     </div>
   `
 }//template 
 
 function addNotes(recipe) {
-  let recipeNotes = document.getElementById(`${recipe.id}`)
+  let recipeNotes = document.getElementById(`recipe-notes-${recipe.id}`)
   recipe.notes.forEach(note => {
       let li = document.createElement('li');
       li.classList.add("recipe-note");

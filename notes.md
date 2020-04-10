@@ -29,11 +29,12 @@ Substance
     * user has_many liked_recipes
 
 Style
+[] Styling of 'add recipe note' buttons
 [] New recipe form like in Toy Tale
+[] Format ul's
 [] Center grid of cards
 [] Play around with existing card templates
 [] Limit number of notes that show at once (or allow user to scroll)
-[] Styling of 'add recipe note' buttons
 
 Questions
 [] How to make text box/submit button appear when new notes button is clicked
