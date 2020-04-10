@@ -61,12 +61,34 @@ function createNoteFromForm(e) {
   //DOM Getters
   const noteContent = e.target.note.value;
   const wordArr = e.target.parentNode.id.split(" ");
-  const recipeId = wordArr[wordArr.length-1];
-  debugger 
+  const recipeId = parseInt(wordArr[wordArr.length-1]);
 
   //Formulate strong params
+  let strongParams = {
+    note: {
+      content: noteContent,
+      recipe_id: recipeId
+    }
+  };
 
   //Fetch request
+  fetch('http://localhost:3000/api/notes', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(strongParams)
+  })
+  .then(resp => resp.json())
+  .then(note => {
+      console.log("Content from db: ", note.content)
+    // recipes.push(recipe);
+    // renderRecipe(recipe);
+    // document.getElementById('name').value = ""
+    // document.getElementById('url').value = ""
+    // document.getElementById('img_url').value = ""
+  });
 
 }
 
@@ -84,12 +106,6 @@ function renderRecipe(r) {
   addNoteButton.innerText = "Add a recipe note"
   addNoteButton.id = `add-note-btn-${r.id}`
   document.getElementById(`card ${r.id}`).appendChild(addNoteButton);
-  //debugger
-  //Need the text box for content of new note to appear dynamically when button clicked
-//   addNoteButton.addEventListener('click', function(event) {
-//       console.log("Click event")
-//   });
-
 }//renderRecipe
 
 function template(recipe) {
