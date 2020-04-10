@@ -1,4 +1,6 @@
 Substance
+[] Abstract note functionality out of recipe.js and into a note.js class?
+
 [] Clear fields when form is submitted
 
 [] Create an event controller that handles all clicks

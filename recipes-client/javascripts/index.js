@@ -7,11 +7,13 @@ document.addEventListener('DOMContentLoaded', function() {
 let recipes = [];
 
 //DOM Getters
+//Can these be used by js classes?
 let getRecipesList = () => document.querySelector('div.recipes-list');
 let getForm = () => document.getElementById('recipe-form')
 let getName = () => document.getElementById('name').value
 let getURL = () => document.getElementById('url').value
 let getImgURL = () => document.getElementById('img_url').value
+let getButtons = () => document.getElementsByClassName('add-note-btn')
 
 function getRecipes() {
   //fetch sends a GET request by default
@@ -56,7 +58,7 @@ function renderNoteForm(e) {
 }
 
 function createNoteFromForm(e) {
-  console.log("Inside createNoteFromForm");
+  //console.log("Inside createNoteFromForm");
   e.preventDefault();
 
   //DOM Getters
