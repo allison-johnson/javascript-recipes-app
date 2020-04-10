@@ -2,7 +2,10 @@ document.addEventListener('DOMContentLoaded', function() {
   //This should send AJAX request to Rails side to fetch all recipes information
   getRecipes();
   getForm().addEventListener('submit', createFromForm);
-})//DOMContentLoaded event listenter 
+  document.addEventListener('click', function(e){
+    console.log("Clicked on", e.target);
+  })
+})//DOMContentLoaded event listener 
 
 let recipes = [];
 
@@ -12,6 +15,7 @@ const getForm = () => document.getElementById('recipe-form')
 const getName = () => document.getElementById('name').value
 const getURL = () => document.getElementById('url').value
 const getImgURL = () => document.getElementById('img_url').value
+const getAddNoteButtons = () => document.getElementsByClassName('add-note-btn');
 //const getRecipeNotesList = () => 
 
 function getRecipes() {
@@ -32,6 +36,9 @@ function getRecipes() {
 
 function renderRecipes(recipes) {
   recipes.forEach(recipe => renderRecipe(recipe));
+  document.getElementById('1').addEventListener('click', function(event) {
+    console.log("Click event")
+  });
 }//renderRecipes
 
 function renderRecipe(r) {
@@ -44,9 +51,15 @@ function renderRecipe(r) {
   //Create an 'add note' button on that recipe's card
   let addNoteButton = document.createElement('button');
   addNoteButton.class = "btn"
+  addNoteButton.classList.add("add-note-btn");
   addNoteButton.innerText = "Add a recipe note"
   addNoteButton.id = r.id
   document.getElementById(`card ${r.id}`).appendChild(addNoteButton);
+  //debugger
+  //Need the text box for content of new note to appear dynamically when button clicked
+  addNoteButton.addEventListener('click', function(event) {
+      console.log("Click event")
+  });
 
 }//renderRecipe
 
@@ -71,6 +84,12 @@ function addNotes(recipe) {
       recipeNotes.appendChild(li);
   })
 }//addNotes
+
+//Adds new note to a recipe
+function addNewNote(e) {
+  console.log("in addNewNote function")
+  console.log(e.target)
+}
 
 function createFromForm(e) {
   /* Formulate strong params as data to match Rails strong params
