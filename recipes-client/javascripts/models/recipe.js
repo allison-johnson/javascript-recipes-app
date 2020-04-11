@@ -32,15 +32,13 @@ class Recipe {
 
   //creates a new recipe from a form 
   static createFromForm(e) {
-    /* Formulate strong params as data to match Rails strong params
-    Get returned promise from our AJAX call
-    Add the recipe to the page */
     e.preventDefault();
 
     const name = getName();
     const url = getURL();
     const imgURL = getImgURL();
 
+    //Formulate strong params to match Rails storng params
     let strongParams = {
         recipe: {
           name: name,
@@ -49,15 +47,7 @@ class Recipe {
         }
     };
 
-    // fetch('http://localhost:3000/api/recipes', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Accept': 'application/json',
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(strongParams)
-    // })
-    // .then(resp => resp.json())
+    //Get returned promise from AJAX call and add recipe to page
     API.post('/recipes', strongParams)
     .then(data => {
         let recipe = new Recipe(data)

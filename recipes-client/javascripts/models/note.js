@@ -33,13 +33,9 @@ class Note {
     lastNewNoteForm.addEventListener("submit", function(e){
         e.preventDefault();
 
-        //What recipe to call createNoteFromForm on? 
-        //TODO: probably should be a static Note method
-        //debugger 
         let targetName = e.target.parentElement.getElementsByTagName('a')[0].innerText;
         let targetRecipe = Recipe.all.find(recipe => recipe.name === targetName)
         
-        //make this a static Note method 
         Note.createNoteFromForm(e);
     })
   }//renderNoteForm
@@ -63,21 +59,20 @@ class Note {
     };
 
     //Fetch request to create note in DB
-    fetch('http://localhost:3000/api/notes', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(strongParams)
-    })
-    .then(resp => resp.json())
+    // fetch('http://localhost:3000/api/notes', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(strongParams)
+    // })
+    // .then(resp => resp.json())
+    API.post('/notes', strongParams)
     .then(data => {
         //Add created note to correct recipe on front end
         let note = new Note(data);
-        //debugger 
         Recipe.all.find(recipe => recipe.id === note.recipe_id).notes.push(note);
-        //console.log(note);
 
         //Add new note to ul for that recipe's card
         let ul = document.getElementById(`recipe-notes-${note.recipe_id}`)
