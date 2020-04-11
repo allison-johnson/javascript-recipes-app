@@ -110,11 +110,7 @@ class Recipe {
 
   //Add notes to the recipe's card
   addNotes() {
-    // console.log("this in addNotes: ", this)
-    // console.log("this.id in addNotes: ", this.id)
     let recipeNotes = document.getElementById(`recipe-notes-${this.id}`)
-    console.log("this: ", this)
-    console.log("this.notes: ", this.notes)
     this.notes.forEach(note => {
         let li = document.createElement('li');
         li.classList.add("recipe-note");
@@ -129,12 +125,28 @@ class Recipe {
 
     //When clicked, button should generate new text field and submit button
     let buttons = getButtons();
+    console.log(buttons);
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener("click", function(e) {
-            //Which recipe object is this getting called on?
-            let targetIdArr = e.target.id.split("-");
-            let targetRecipeIndex = parseInt(targetIdArr[targetIdArr.length-1])-1;
-            let targetRecipe = Recipe.all[targetRecipeIndex]
+            //Find which recipe object is this getting called on
+
+            //Tried using id to identify recipe, but causes problems when recipes get deleted from db
+            // let targetIdArr = e.target.id.split("-");
+            // console.log("targetIdArr: ", targetIdArr)
+
+            // let targetRecipeIndex = parseInt(targetIdArr[targetIdArr.length-1])-1;
+            // console.log("targetRecipeIndex: ", targetRecipeIndex)
+
+            // let targetRecipe = Recipe.all[targetRecipeIndex]
+            // console.log("targetRecipe: ", targetRecipe)
+
+            let targetName = e.target.parentElement.getElementsByTagName('a')[0].innerText;
+            console.log("targetName: ", targetName)
+
+            let targetRecipe = Recipe.all.find(recipe => recipe.name === targetName)
+            console.log("targetRecipe: ", targetRecipe)
+            //debugger
+
             targetRecipe.renderNoteForm(e);
         })
     }
@@ -153,13 +165,25 @@ class Recipe {
     let allNewNoteForms = document.getElementsByClassName("new-note-form");
     let lastNewNoteForm = allNewNoteForms.item(allNewNoteForms.length-1);
     lastNewNoteForm.addEventListener("submit", function(e){
-        createNoteFromForm(e);
+        e.preventDefault();
+
+        //What recipe to call createNoteFromForm on? 
+        //TODO: probably should be a static Note method
+        //debugger 
+        let targetName = e.target.parentElement.getElementsByTagName('a')[0].innerText;
+        let targetRecipe = Recipe.all.find(recipe => recipe.name === targetName)
+        targetRecipe.createNoteFromForm(e);
     })
   }//renderNoteForm
 
-  //creates a new note based on the content of a 'new note' form
+  //creates a new recipe note based on the content of a 'new note' form
   createNoteFromForm(e) {
     e.preventDefault();
+
+    //DOM Getters
+    let noteContent = e.target.note.value;
+    let wordArr = e.target.parentNode.id.split(" ");
+    let recipeId = parseInt(wordArr[wordArr.length-1]);
 
     //Formulate strong params
     let strongParams = {
@@ -177,17 +201,23 @@ class Recipe {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(strongParams)
-    }).then(resp => resp.json())
-    .then(note => {
+    })
+    .then(resp => resp.json())
+    .then(data => {
+        //Add created note to correct recipe on front end
+        //console.log("this in .then line 185: ", this)
+        let note = new Note(data);
+        console.log(note)
+
         //Add new note to ul for that recipe's card
-        ul = document.getElementById(`recipe-notes-${note.recipe_id}`)
-        li = document.createElement('li');
+        let ul = document.getElementById(`recipe-notes-${note.recipe_id}`)
+        let li = document.createElement('li');
         li.innerText = note.content;
         ul.appendChild(li);
 
         //Remove form from DOM
-        newNoteForms = document.getElementsByClassName("new-note-form")
-        mostRecent = newNoteForms[newNoteForms.length-1];
+        let newNoteForms = document.getElementsByClassName("new-note-form")
+        let mostRecent = newNoteForms[newNoteForms.length-1];
         mostRecent.parentNode.removeChild(mostRecent);
     });
   }//createNoteFromForm
