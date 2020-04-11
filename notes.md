@@ -32,15 +32,18 @@ Substance
     * user can 'like' a recipe
     * user has_many liked_recipes
 
+[] Why can't you attach event listeners iteratively? (i.e., need to wait until ALL delete buttons are created before adding event listeners to ALL of them, rather than attaching the listener to each one right after it is created)
+
 Style
 [] Styling of 'add recipe note' buttons
 [] New recipe form like in Toy Tale
-[] Format ul's (maybe left align li's?)
 [] Center grid of cards
 [] Play around with existing card templates
 [] Limit number of notes that show at once (or allow user to scroll)
 
 Stretch Ideas
+[] Add categories and then group recipes by category
+[] Drag and drop recipes into a box (for now)? Then add a box for each day.
 
 Questions
 [] After submitting new recipe, why do I have to refresh page in order for 'add recipe note' buttons to work???

@@ -5,7 +5,12 @@ class Note {
     this.id = data.id; 
     this.content = data.content;
     this.recipe_id = data.recipe_id;
+    this.save();
   }//constructor
+
+  save() {
+    Note.all.push(this);
+  }//save
 
   //Add recipe's notes to its card (static b/c not an instance method)
   static addNotes(recipe) {
@@ -15,7 +20,39 @@ class Note {
         li.classList.add("recipe-note");
         li.innerHTML = note.content;
         recipeNotes.appendChild(li);
+
+        //Add a delete button to the note
+        let deleteNoteButton = document.createElement('button');
+        deleteNoteButton.classList.add("delete-button");
+        deleteNoteButton.innerHTML = `&#x274C`;
+        li.appendChild(deleteNoteButton)
+
+        //Attach an event listener to deleteNoteButton
+        // deleteNoteButton.addEventListener('click', function(e) {
+        //   //Find id of associated note
+        //   console.log("Button clicked")
+        //   debugger 
+        //   //Send delete fetch request to backend to delete note
+        //   //Delete note from frontend
+        //   //Delete note from DOM (but seems like maybe that should be automatic?)
+        // })
     })
+    //Attach event listeners to all deleteNoteButtons
+    let buttons = document.getElementsByClassName("delete-button");
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener('click', function(e){
+        //Find id of the note
+        let noteContent = e.target.parentElement.innerText;
+        let noteContentLen = noteContent.length; 
+        noteContent = noteContent.slice(0, noteContentLen-1);
+        let noteId = Note.all.find(note => note.content === noteContent).id;
+
+        //Send delete fetch request to backend
+        //fetch(`http://localhost:3000/api/notes/delete/${noteId}`)
+        //Delete note from frontend
+        //Delete note from DOM (or maybe that's automatic?)
+      })
+    }
   }//addNotes
 
   static renderNoteForm(e) {
@@ -58,16 +95,6 @@ class Note {
         }
     };
 
-    //Fetch request to create note in DB
-    // fetch('http://localhost:3000/api/notes', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(strongParams)
-    // })
-    // .then(resp => resp.json())
     API.post('/notes', strongParams)
     .then(data => {
         //Add created note to correct recipe on front end
