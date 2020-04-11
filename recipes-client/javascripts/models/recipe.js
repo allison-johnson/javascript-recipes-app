@@ -161,50 +161,50 @@ class Recipe {
 //   }//renderNoteForm
 
   //creates a new recipe note based on the content of a 'new note' form
-  createNoteFromForm(e) {
-    e.preventDefault();
+//   createNoteFromForm(e) {
+//     e.preventDefault();
 
-    //DOM Getters
-    let noteContent = e.target.note.value;
-    let wordArr = e.target.parentNode.id.split(" ");
-    let recipeId = parseInt(wordArr[wordArr.length-1]);
+//     //DOM Getters
+//     let noteContent = e.target.note.value;
+//     let wordArr = e.target.parentNode.id.split(" ");
+//     let recipeId = parseInt(wordArr[wordArr.length-1]);
 
-    //Formulate strong params
-    let strongParams = {
-        note: {
-          content: noteContent,
-          recipe_id: recipeId
-        }
-    };
+//     //Formulate strong params
+//     let strongParams = {
+//         note: {
+//           content: noteContent,
+//           recipe_id: recipeId
+//         }
+//     };
 
-    //Fetch request
-    fetch('http://localhost:3000/api/notes', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(strongParams)
-    })
-    .then(resp => resp.json())
-    .then(data => {
-        //Add created note to correct recipe on front end
-        //console.log("this in .then line 185: ", this)
-        let note = new Note(data);
-        console.log(note)
+//     //Fetch request
+//     fetch('http://localhost:3000/api/notes', {
+//       method: 'POST',
+//       headers: {
+//         'Accept': 'application/json',
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify(strongParams)
+//     })
+//     .then(resp => resp.json())
+//     .then(data => {
+//         //Add created note to correct recipe on front end
+//         //console.log("this in .then line 185: ", this)
+//         let note = new Note(data);
+//         console.log(note)
 
-        //Add new note to ul for that recipe's card
-        let ul = document.getElementById(`recipe-notes-${note.recipe_id}`)
-        let li = document.createElement('li');
-        li.innerText = note.content;
-        ul.appendChild(li);
+//         //Add new note to ul for that recipe's card
+//         let ul = document.getElementById(`recipe-notes-${note.recipe_id}`)
+//         let li = document.createElement('li');
+//         li.innerText = note.content;
+//         ul.appendChild(li);
 
-        //Remove form from DOM
-        let newNoteForms = document.getElementsByClassName("new-note-form")
-        let mostRecent = newNoteForms[newNoteForms.length-1];
-        mostRecent.parentNode.removeChild(mostRecent);
-    });
-  }//createNoteFromForm
+//         //Remove form from DOM
+//         let newNoteForms = document.getElementsByClassName("new-note-form")
+//         let mostRecent = newNoteForms[newNoteForms.length-1];
+//         mostRecent.parentNode.removeChild(mostRecent);
+//     });
+//   }//createNoteFromForm
 
 
 
