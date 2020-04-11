@@ -26,17 +26,8 @@ class Note {
         deleteNoteButton.classList.add("delete-button");
         deleteNoteButton.innerHTML = `&#x274C`;
         li.appendChild(deleteNoteButton)
-
-        //Attach an event listener to deleteNoteButton
-        // deleteNoteButton.addEventListener('click', function(e) {
-        //   //Find id of associated note
-        //   console.log("Button clicked")
-        //   debugger 
-        //   //Send delete fetch request to backend to delete note
-        //   //Delete note from frontend
-        //   //Delete note from DOM (but seems like maybe that should be automatic?)
-        // })
     })
+
     //Attach event listeners to all deleteNoteButtons
     let buttons = document.getElementsByClassName("delete-button");
     for (let i = 0; i < buttons.length; i++) {
@@ -45,24 +36,29 @@ class Note {
         let noteContent = e.target.parentElement.innerText;
         let noteContentLen = noteContent.length; 
         noteContent = noteContent.slice(0, noteContentLen-1);
-        debugger 
+        //debugger 
         let noteId = Note.all.find(note => note.content === noteContent).id;
 
         //Send delete fetch request to backend
         console.log("sending delete fetch request")
-        return fetch(`http://localhost:3000/api/notes/${noteId}`, {
+        fetch(`http://localhost:3000/api/notes/${noteId}`, {
           method: 'DELETE',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           }
         })
-        // .then(resp => resp.json())
-        // .then(data => console.log(data))
+        .then(function(res) {
+          if (res.ok) {
+            return Promise.resolve('Note deleted.')
+          }
+          else {
+            return Promise.reject('An error occurred.')
+          }
+        })
+        .then(data => console.log(data));
 
-
-        //Delete note from frontend
-        //Delete note from DOM (or maybe that's automatic?)
+        //Note deleted from frontend and DOM only on page refresh...
 
       })//addEventListener
     }//for
@@ -70,6 +66,7 @@ class Note {
   }//addNotes
 
   static renderNoteForm(e) {
+    //e.target.parentNode
     e.target.parentNode.insertAdjacentHTML("beforeend", `
      <form class="new-note-form">
        <label for="note">Enter recipe note: </label>

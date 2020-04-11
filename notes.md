@@ -46,93 +46,17 @@ Stretch Ideas
 [] Drag and drop recipes into a box (for now)? Then add a box for each day.
 
 Questions
-[] After submitting new recipe, why do I have to refresh page in order for 'add recipe note' buttons to work???
+1. After submitting new recipe, why do I have to refresh page in order for 'add recipe note' buttons to work???
 
-[] With deleting notes: request gets made to backend, note gets deleted from db:
-    * Why does page have to be refreshed in order for that note to disappear?
-    * 
-[] How to clear values from input boxes once recipe is submitted
-[] How to center the entire grid of cards
+2. With deleting notes: request gets made to backend, note gets deleted from db:
+    * Why does page have to be refreshed in order for that note to disappear? I should be able to load the remaining recipes/notes using the ones we already have loaded in JS rather than sending *another* fetch request, but how?
 
+    * Delete patch requent sent to backend, note deleted from db, what does request return to front end? How does the note automatically get deleted from the Note.all array?
 
-createForm => function formTemplate(project)
+3. How to clear values from input boxes once recipe is submitted
 
-Inside Javascripts -> models and -> services (anything to do with the API/fetching)
-    class Blog
-        - constructor (filter out data on API side as well, maybe don't need user_id if it's in the user class)
-        - this.user = new User(data.user) if you want to have a user class as well
-        - Now you can construct blog objects from index.js
-        - move blogs array out of index
-        - move template function to Blog class
-            prototype function/instance method so it will return a template that represents the data of this instance
-            - don't need 'function' keyword
-
-        - static renderBlogs() function (class function, not about one blog)
-
-        - change fetch get request to use Blog class:
-
-            .then{resp => resp.json()}
-            .then(data => {
-                let blog = new Blog(data)
-                blog.render();
-                resetInput();
-            })
-        
-        - static createFromForm()
-        - static load() (and then call it from index.js inside DOMcontent loaded)
-    
-    *Services* services -> api.js
-    class API {
-        //no instance methods because we don't have any instances!
-        //everything has class-level scope
-        static baseURL = 'http://localhost:3000/api';
-
-        //get data
-        static get(url){ 
-            //return what we fetch
-            return fetch(API.baseURL + url).then(resp => resp.json())
-        }
-
-        //post data
-        static post(url, data) {
-            //data will be strong params
-            return fetch(API.baseURL + url, {
-                method: 'POST'
-                headers: {
-                    //blah blah
-                },
-                body: JSON.stringify(data)
-            })
-            .then(resp => resp.json())
-        }
-
-        //delete data
-    }
-
-    *Then in blog.js*:
-    static load() {
-        API.get('/blogs').then(function(blogs) {
-            ...
-        })
-    }
-
-    //Not sure what function this is in...
-    API.post('/blogs', strongParams).then(data => {
-        let blog = new Blog(data)
-        blog.render();
-        resetInput();
-    })
-
-    
-    
-    <script src="javascripts/models/blog.js"></script> inside index.html BEFORE index.js because index needs to know about blog.
+4. How to center the entire grid of cards
 
 
-Questions
-1. [x] Every blog object in the db has a "mirror" in the frontend? Why?
-    - Faster (fewer connections to API): in the case of a delete, we can just send delete request as a fetch but load the remaining blogs using the blogs we already have loaded in JS rather than sending *another* fetch request to re-load blogs
 
-2. Are globals efined in index.js viewable in blog.js?
-
-3. What does resetInput() do inside .then?
 

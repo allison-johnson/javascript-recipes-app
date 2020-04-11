@@ -63,7 +63,7 @@ class Recipe {
       <div class="card-content">
         <img class="recipe-img" src="${this.img_url}"/><br>
         <a href=${this.url} class="card-url">${this.name}</a>
-        <ul id="recipe-notes-${this.id}"></ul>
+        <ul class="recipe-notes" id="recipe-notes-${this.id}"></ul>
       </div>
     </div>
     `

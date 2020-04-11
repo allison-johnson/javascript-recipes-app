@@ -47,3 +47,8 @@ body {
 ul {
   text-align: left;
 }
+
+.recipe-notes {
+  height: 5rem;
+  overflow: auto;
+}
