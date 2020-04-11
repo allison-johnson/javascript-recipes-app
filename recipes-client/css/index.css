@@ -52,3 +52,16 @@ ul {
   height: 5rem;
   overflow: auto;
 }
+
+.add-note-btn {
+  background-color: #4CAF50;
+  font-size: 1rem;
+  border-radius: 8px;
+  opacity: 0.8;
+  width: 150px;
+  margin-left: 60%;
+}
+
+.add-note-btn:hover {
+  opacity: 1;
+}

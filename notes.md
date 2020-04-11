@@ -1,13 +1,9 @@
 Substance
+[] Delete button should appear as soon as recipe note is submitted (no refresh button needed!)
+
 [] Why is refresh necessary after adding recipe in order to add any notes?
 
-[] Limit number of notes on card
-    [] Allow user to type in note even if it's "off" the form
-    [] Maybe attach form to a higher-up element than the card?
-
 [] Clear fields when form is submitted
-
-[] New recipe note pops up in different div so that user can always submit a note
 
 [] Create an event controller that handles all clicks
     * Listen for clicks at the top level (document)
@@ -24,8 +20,6 @@ Substance
 
 [] Form to edit a recipe (or a note?)
 
-[] Button to delete a note
-
 [] Recipes can be deleted
 
 [] Add User class; recipe belongs_to user
@@ -39,7 +33,6 @@ Style
 [] New recipe form like in Toy Tale
 [] Center grid of cards
 [] Play around with existing card templates
-[] Limit number of notes that show at once (or allow user to scroll)
 
 Stretch Ideas
 [] Add categories and then group recipes by category
@@ -60,3 +53,4 @@ Questions
 
 
 
+box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19); 
