@@ -62,7 +62,7 @@ class Note {
         }
     };
 
-    //Fetch request
+    //Fetch request to create note in DB
     fetch('http://localhost:3000/api/notes', {
       method: 'POST',
       headers: {

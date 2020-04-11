@@ -103,17 +103,6 @@ class Recipe {
     document.getElementById(`card ${this.id}`).appendChild(addNoteButton);
   }//render (HTML template for recipe's card)
 
-  //Add notes to the recipe's card
-//   addNotes() {
-//     let recipeNotes = document.getElementById(`recipe-notes-${this.id}`)
-//     this.notes.forEach(note => {
-//         let li = document.createElement('li');
-//         li.classList.add("recipe-note");
-//         li.innerHTML = note.content;
-//         recipeNotes.appendChild(li);
-//     })
-//   }//addNotes
-
   //renders the HTML for ALL recipes
   static renderRecipes() {
     Recipe.all.forEach(recipe => recipe.render());
@@ -123,89 +112,9 @@ class Recipe {
     console.log(buttons);
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener("click", function(e) {
-            //Find which recipe object is this getting called on
-            // let targetName = e.target.parentElement.getElementsByTagName('a')[0].innerText;
-            // console.log("targetName: ", targetName)
-
-            // let targetRecipe = Recipe.all.find(recipe => recipe.name === targetName)
-            // console.log("targetRecipe: ", targetRecipe)
-
-            //renderNoteForm should be static note method
             Note.renderNoteForm(e);
         })
     }
   }//renderRecipes
-
-  //renders the note form to appear when an 'add note' button is clicked
-//   renderNoteForm(e) {
-//     e.target.parentNode.insertAdjacentHTML("beforeend", `
-//      <form class="new-note-form">
-//        <label for="note">Enter recipe note: </label>
-//        <input type="text" name="note">
-//        <input type="submit" id="submit-note" value=&#10004;>
-//      </form>
-//     `);
-
-//     let allNewNoteForms = document.getElementsByClassName("new-note-form");
-//     let lastNewNoteForm = allNewNoteForms.item(allNewNoteForms.length-1);
-//     lastNewNoteForm.addEventListener("submit", function(e){
-//         e.preventDefault();
-
-//         //What recipe to call createNoteFromForm on? 
-//         //TODO: probably should be a static Note method
-//         //debugger 
-//         let targetName = e.target.parentElement.getElementsByTagName('a')[0].innerText;
-//         let targetRecipe = Recipe.all.find(recipe => recipe.name === targetName)
-//         targetRecipe.createNoteFromForm(e);
-//     })
-//   }//renderNoteForm
-
-  //creates a new recipe note based on the content of a 'new note' form
-//   createNoteFromForm(e) {
-//     e.preventDefault();
-
-//     //DOM Getters
-//     let noteContent = e.target.note.value;
-//     let wordArr = e.target.parentNode.id.split(" ");
-//     let recipeId = parseInt(wordArr[wordArr.length-1]);
-
-//     //Formulate strong params
-//     let strongParams = {
-//         note: {
-//           content: noteContent,
-//           recipe_id: recipeId
-//         }
-//     };
-
-//     //Fetch request
-//     fetch('http://localhost:3000/api/notes', {
-//       method: 'POST',
-//       headers: {
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify(strongParams)
-//     })
-//     .then(resp => resp.json())
-//     .then(data => {
-//         //Add created note to correct recipe on front end
-//         //console.log("this in .then line 185: ", this)
-//         let note = new Note(data);
-//         console.log(note)
-
-//         //Add new note to ul for that recipe's card
-//         let ul = document.getElementById(`recipe-notes-${note.recipe_id}`)
-//         let li = document.createElement('li');
-//         li.innerText = note.content;
-//         ul.appendChild(li);
-
-//         //Remove form from DOM
-//         let newNoteForms = document.getElementsByClassName("new-note-form")
-//         let mostRecent = newNoteForms[newNoteForms.length-1];
-//         mostRecent.parentNode.removeChild(mostRecent);
-//     });
-//   }//createNoteFromForm
-
-
 
 }//class
