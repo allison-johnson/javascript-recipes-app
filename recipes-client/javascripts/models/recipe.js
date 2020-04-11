@@ -7,11 +7,8 @@ class Recipe {
     this.url = data.url;
     this.img_url = data.img_url;
     this.notes = [];
-    //this.notes = data.notes; //Or create new Note object for each note?
+    
     let notes = data.notes
-    // console.log(notes)
-    // debugger 
-    // notes.forEach(noteData => new Note(noteData))
     for (let i = 0; i < notes.length; i++) {
       this.notes.push(new Note(notes[i]))
     }//for
@@ -73,11 +70,8 @@ class Recipe {
         console.log("New recipe notes: ", recipe.notes)
         recipe.render();
         resetInput();
-        // document.getElementById('name').value = ""
-        // document.getElementById('url').value = ""
-        // document.getElementById('img_url').value = ""
     });
-  }//createFromForm 
+  }//createFromForm (new recipe)
 
   //returns HTML template for a recipe's card
   template() {
@@ -100,13 +94,14 @@ class Recipe {
     Note.addNotes(this);
 
     //Create 'add note' button on the recipe's card
+    //Should this get delegated to Note class?
     let addNoteButton = document.createElement('button');
     addNoteButton.class = "btn";
     addNoteButton.classList.add("add-note-btn");
     addNoteButton.innerText = "Add a recipe note";
     addNoteButton.id = `add-note-btn-${this.id}`;
     document.getElementById(`card ${this.id}`).appendChild(addNoteButton);
-  }//render
+  }//render (HTML template for recipe's card)
 
   //Add notes to the recipe's card
 //   addNotes() {
@@ -129,52 +124,41 @@ class Recipe {
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener("click", function(e) {
             //Find which recipe object is this getting called on
+            // let targetName = e.target.parentElement.getElementsByTagName('a')[0].innerText;
+            // console.log("targetName: ", targetName)
 
-            //Tried using id to identify recipe, but causes problems when recipes get deleted from db
-            // let targetIdArr = e.target.id.split("-");
-            // console.log("targetIdArr: ", targetIdArr)
-
-            // let targetRecipeIndex = parseInt(targetIdArr[targetIdArr.length-1])-1;
-            // console.log("targetRecipeIndex: ", targetRecipeIndex)
-
-            // let targetRecipe = Recipe.all[targetRecipeIndex]
+            // let targetRecipe = Recipe.all.find(recipe => recipe.name === targetName)
             // console.log("targetRecipe: ", targetRecipe)
 
-            let targetName = e.target.parentElement.getElementsByTagName('a')[0].innerText;
-            console.log("targetName: ", targetName)
-
-            let targetRecipe = Recipe.all.find(recipe => recipe.name === targetName)
-            console.log("targetRecipe: ", targetRecipe)
-            //debugger
-
-            targetRecipe.renderNoteForm(e);
+            //renderNoteForm should be static note method
+            Note.renderNoteForm(e);
         })
     }
   }//renderRecipes
 
   //renders the note form to appear when an 'add note' button is clicked
-  renderNoteForm(e) {
-    e.target.parentNode.insertAdjacentHTML("beforeend", `
-     <form class="new-note-form">
-       <label for="note">Enter recipe note: </label>
-       <input type="text" name="note">
-       <input type="submit" id="submit-note" value=&#10004;>
-     </form>
-    `);
+//   renderNoteForm(e) {
+//     e.target.parentNode.insertAdjacentHTML("beforeend", `
+//      <form class="new-note-form">
+//        <label for="note">Enter recipe note: </label>
+//        <input type="text" name="note">
+//        <input type="submit" id="submit-note" value=&#10004;>
+//      </form>
+//     `);
 
-    let allNewNoteForms = document.getElementsByClassName("new-note-form");
-    let lastNewNoteForm = allNewNoteForms.item(allNewNoteForms.length-1);
-    lastNewNoteForm.addEventListener("submit", function(e){
-        e.preventDefault();
+//     let allNewNoteForms = document.getElementsByClassName("new-note-form");
+//     let lastNewNoteForm = allNewNoteForms.item(allNewNoteForms.length-1);
+//     lastNewNoteForm.addEventListener("submit", function(e){
+//         e.preventDefault();
 
-        //What recipe to call createNoteFromForm on? 
-        //TODO: probably should be a static Note method
-        //debugger 
-        let targetName = e.target.parentElement.getElementsByTagName('a')[0].innerText;
-        let targetRecipe = Recipe.all.find(recipe => recipe.name === targetName)
-        targetRecipe.createNoteFromForm(e);
-    })
-  }//renderNoteForm
+//         //What recipe to call createNoteFromForm on? 
+//         //TODO: probably should be a static Note method
+//         //debugger 
+//         let targetName = e.target.parentElement.getElementsByTagName('a')[0].innerText;
+//         let targetRecipe = Recipe.all.find(recipe => recipe.name === targetName)
+//         targetRecipe.createNoteFromForm(e);
+//     })
+//   }//renderNoteForm
 
   //creates a new recipe note based on the content of a 'new note' form
   createNoteFromForm(e) {
