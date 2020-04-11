@@ -45,14 +45,28 @@ class Note {
         let noteContent = e.target.parentElement.innerText;
         let noteContentLen = noteContent.length; 
         noteContent = noteContent.slice(0, noteContentLen-1);
+        debugger 
         let noteId = Note.all.find(note => note.content === noteContent).id;
 
         //Send delete fetch request to backend
-        //fetch(`http://localhost:3000/api/notes/delete/${noteId}`)
+        console.log("sending delete fetch request")
+        return fetch(`http://localhost:3000/api/notes/${noteId}`, {
+          method: 'DELETE',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        })
+        // .then(resp => resp.json())
+        // .then(data => console.log(data))
+
+
         //Delete note from frontend
         //Delete note from DOM (or maybe that's automatic?)
-      })
-    }
+
+      })//addEventListener
+    }//for
+
   }//addNotes
 
   static renderNoteForm(e) {

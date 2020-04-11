@@ -92,7 +92,6 @@ class Recipe {
 
     //When clicked, button should generate new text field and submit button
     let buttons = getButtons();
-    console.log(buttons);
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener("click", function(e) {
             Note.renderNoteForm(e);

@@ -47,6 +47,10 @@ Stretch Ideas
 
 Questions
 [] After submitting new recipe, why do I have to refresh page in order for 'add recipe note' buttons to work???
+
+[] With deleting notes: request gets made to backend, note gets deleted from db:
+    * Why does page have to be refreshed in order for that note to disappear?
+    * 
 [] How to clear values from input boxes once recipe is submitted
 [] How to center the entire grid of cards
 
