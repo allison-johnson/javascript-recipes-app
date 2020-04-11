@@ -17,7 +17,7 @@ class Api::RecipesController < ApplicationController
   def create
     recipe = Recipe.new(recipe_params);
     if recipe.save
-      render json: recipe, status: :created
+      render json: recipe, include: [:notes], status: :created
     else
       render json: recipe.errors, status: :unprocessable_entity
     end
