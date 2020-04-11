@@ -49,18 +49,18 @@ class Recipe {
         }
     };
 
-    fetch('http://localhost:3000/api/recipes', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(strongParams)
-    })
-    .then(resp => resp.json())
+    // fetch('http://localhost:3000/api/recipes', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Accept': 'application/json',
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(strongParams)
+    // })
+    // .then(resp => resp.json())
+    API.post('/recipes', strongParams)
     .then(data => {
         let recipe = new Recipe(data)
-        console.log("New recipe notes: ", recipe.notes)
         recipe.render();
         resetInput();
     });
