@@ -1,4 +1,8 @@
 Substance
+[] Limit number of notes on card
+    [] Allow user to type in note even if it's "off" the form
+    [] Maybe attach form to a higher-up element than the card?
+
 [] Abstract note functionality out of recipe.js and into a note.js class?
 
 [] Clear fields when form is submitted
@@ -13,11 +17,11 @@ Substance
     [x] On submit, form gets destroyed
     [] When add button is clicked, do nothing if parent element's HTML already contains <form>
 
+[] Check that validations work on front end 
+
 [] Form to edit a recipe (or a note?)
 
-[] New recipe form only appears on click
-
-[] Notes can be deleted?
+[] Button to delete a note
 
 [] Recipes can be deleted
 
@@ -36,7 +40,7 @@ Style
 Stretch Ideas
 
 Questions
-[] How to make text box/submit button appear when new notes button is clicked
+[] After submitting new recipe, why do I have to refresh page in order for 'add recipe note' buttons to work???
 [] How to clear values from input boxes once recipe is submitted
 [] How to center the entire grid of cards
 

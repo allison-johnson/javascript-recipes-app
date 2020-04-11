@@ -97,7 +97,7 @@ class Recipe {
     getRecipesList().innerHTML += this.template();
 
     //Add notes to the recipe's card
-    this.addNotes();
+    Note.addNotes(this);
 
     //Create 'add note' button on the recipe's card
     let addNoteButton = document.createElement('button');
@@ -109,15 +109,15 @@ class Recipe {
   }//render
 
   //Add notes to the recipe's card
-  addNotes() {
-    let recipeNotes = document.getElementById(`recipe-notes-${this.id}`)
-    this.notes.forEach(note => {
-        let li = document.createElement('li');
-        li.classList.add("recipe-note");
-        li.innerHTML = note.content;
-        recipeNotes.appendChild(li);
-    })
-  }//addNotes
+//   addNotes() {
+//     let recipeNotes = document.getElementById(`recipe-notes-${this.id}`)
+//     this.notes.forEach(note => {
+//         let li = document.createElement('li');
+//         li.classList.add("recipe-note");
+//         li.innerHTML = note.content;
+//         recipeNotes.appendChild(li);
+//     })
+//   }//addNotes
 
   //renders the HTML for ALL recipes
   static renderRecipes() {
