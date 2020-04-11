@@ -22,14 +22,7 @@ class Recipe {
 
   //sends AJAX call to Rails side to fetch all recipe information
   static load() {
-    //fetch sends a GET request by default
-    fetch('http://localhost:3000/api/recipes')
-    .then(function(response){
-        if (response.status !== 200) {
-          throw new Error(response.statusText);
-        }
-        return response.json();
-    })
+    API.get('/recipes')
     .then(function(recipes){
         recipes.forEach(data => new Recipe(data))
         Recipe.renderRecipes();
