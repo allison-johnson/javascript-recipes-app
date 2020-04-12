@@ -37,7 +37,10 @@ class Note {
         let noteContentLen = noteContent.length; 
         noteContent = noteContent.slice(0, noteContentLen-1);
         //debugger 
-        let noteId = Note.all.find(note => note.content === noteContent).id;
+        let targetNote = Note.all.find(note => note.content === noteContent);
+        let targetRecipe = Recipe.all.find(recipe => recipe.id === targetNote.recipe_id);
+        let targetIndex = Note.all.indexOf(targetNote);
+        let noteId = targetNote.id;
 
         //Send delete fetch request to backend
         console.log("sending delete fetch request")
@@ -48,15 +51,48 @@ class Note {
             'Content-Type': 'application/json'
           }
         })
-        .then(function(res) {
-          if (res.ok) {
-            return Promise.resolve('Note deleted.')
-          }
-          else {
-            return Promise.reject('An error occurred.')
-          }
+        .then(response => response.text())
+        .then(text => {
+          // console.log("Text: ", text);
+          // console.log("Notes: ", Note.all);
+
+          //Account for case when targetIndex is 0 or last index
+          //Although it might not be necessary to update Note.all right now...
+          // if (targetIndex > -1) {
+          //   Note.all = Note.all.slice(0, targetIndex).concat(Note.all.slice(targetIndex + 1));
+          // }
+          // console.log("New Notes: ", Note.all);
+          
+          //Removes deleted note from that recipe's recipe.notes array
+          let indexOfNoteInRecipeNotes = targetRecipe.notes.indexOf(targetNote);
+          targetRecipe.notes = targetRecipe.notes.slice(0, indexOfNoteInRecipeNotes).concat(targetRecipe.notes.slice(indexOfNoteInRecipeNotes+1))
+          
+          //Clear recipe notes for that recipe
+          document.getElementById(`recipe-notes-${targetRecipe.id}`).innerHTML = "";
+
+          //Call Note.addNotes(targetRecipe)
+          Note.addNotes(targetRecipe);
+          
+          //console.log(targetRecipe.notes)
+
+          //Clear DOM element with recipe notes before re-rendering
+          // let allNoteLists = document.getElementsByClassName("recipe-notes");
+          // for (let i = 0; i < allNoteLists.length; i++) {
+          //   allNoteLists[i].remove();
+          // }
+          // Recipe.renderRecipes();
+
         })
-        .then(data => console.log(data));
+        
+        // .then(function(res) {
+        //   if (res.ok) {
+        //     return Promise.resolve('Note deleted.')
+        //   }
+        //   else {
+        //     return Promise.reject('An error occurred.')
+        //   }
+        // })
+        // .then(data => console.log(data));
 
         //Note deleted from frontend and DOM only on page refresh...
 

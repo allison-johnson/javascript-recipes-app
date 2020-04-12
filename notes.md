@@ -1,4 +1,8 @@
 Substance
+[] New recipe form like in Toy Tale
+
+[] Error handling: when user tries to submit blank note or a recipe that's missing a field...
+
 [] Delete button should appear as soon as recipe note is submitted (no refresh button needed!)
 
 [] Why is refresh necessary after adding recipe in order to add any notes?
@@ -30,7 +34,6 @@ Substance
 
 Style
 [] Styling of 'add recipe note' buttons
-[] New recipe form like in Toy Tale
 [] Center grid of cards
 [] Play around with existing card templates
 
