@@ -3,16 +3,17 @@ body {
   padding: 0;
   height: 100%;
   width: 100%;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
 #recipes-header{
   display: flex;
   justify-content: center;
-  background: #515da2;
+  /*background: #515da2;*/
   height: 7rem;
-  padding: 1rem;
+  /*padding: 1rem;*/
   font-size: 5rem;
+  margin-bottom: -20px;
 }
 
 /* Trying to center grid of cards */
@@ -63,5 +64,66 @@ ul {
 }
 
 .add-note-btn:hover {
+  opacity: 1;
+}
+
+#new-recipe-btn {
+  background-color: #4CAF50;
+  font-size: 1rem;
+  border-radius: 8px;
+  opacity: 0.8;
+  width: auto;
+  height: 2.5rem;
+  margin-left: 5%;
+}
+
+#new-recipe-btn:hover {
+  opacity: 1;
+}
+
+/* Trying to make input fields horizontal */
+#recipe-form {
+  padding: 1rem;
+  align-items: center; 
+  width: 40%;
+  height: auto;
+  display: none;
+  background: #515da2;
+  opacity: .8;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.input-field {
+  font-size: 1.2rem;
+  padding: 5px;
+}
+
+#recipe-form input {
+  font-size: 1.2rem;
+  border: 2px solid grey;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+input:focus {
+  border: 4px solid green;
+  border-radius: 8px;
+}
+
+#recipe-form label {
+  margin: 5px 10px 5px 0;
+}
+
+#recipe-form input[type="submit"] {
+  color: green;
+  font-size: 1.5rem;
+  opacity: 0.8;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#recipe-form input[type="submit"]:hover {
   opacity: 1;
 }

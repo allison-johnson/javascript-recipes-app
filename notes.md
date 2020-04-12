@@ -45,6 +45,4 @@ Questions
 4. Why can't you attach event listeners iteratively? (i.e., need to wait until ALL delete buttons are created before adding event listeners to ALL of them, rather than attaching the listener to each one right after it is created)
 
 
-
-
-box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19); 
+'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
