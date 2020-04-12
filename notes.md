@@ -1,4 +1,6 @@
 Substance
+[] Weird issue with which notes are in Note.all array ... think about whether that array is even necessary? I never need to access all the notes, just all the notes of a specific recipe!
+
 [] New recipe form like in Toy Tale
 
 [] Error handling: when user tries to submit blank note or a recipe that's missing a field...
