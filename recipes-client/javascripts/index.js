@@ -1,10 +1,23 @@
+let addRecipe = false;
+
 document.addEventListener('DOMContentLoaded', function() {
   //This should send AJAX request to Rails side to fetch all recipes information
   Recipe.load();
-  getForm().addEventListener('submit', Recipe.createFromForm);
+  getForm().addEventListener('click', Recipe.createFromForm);
+
+  const addBtn = document.querySelector("#new-recipe-btn");
+  const recipeForm = document.querySelector("#recipe-form");
+  addBtn.addEventListener("click", () => {
+    addRecipe = !addRecipe;
+    if (addRecipe) {
+      recipeForm.style.display = "block";
+    } else {
+      recipeForm.style.display = "none";
+    }
+  });
 })//DOMContentLoaded event listener 
 
-let recipes = [];
+//let recipes = [];
 
 //DOM Getters
 //Can these be used by js classes?
