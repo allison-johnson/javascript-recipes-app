@@ -22,20 +22,8 @@ class Note {
         recipeNotes.appendChild(li);
 
         //Add a delete button to the note
-        let deleteNoteButton = document.createElement('button');
-        deleteNoteButton.classList.add("delete-button");
-        deleteNoteButton.innerHTML = `&#x274C`;
-        li.appendChild(deleteNoteButton)
+        note.addDeleteNoteButton(li);
     })
-
-    //Add delete buttons to all the notes
-    // let recipeNotes = document.getElementsByClassName("recipe-note");
-    // for (let i = 0; i < recipeNotes.length; i++) {
-    //   let deleteNoteButton = document.createElement('button');
-    //   deleteNoteButton.classList.add("delete-button");
-    //   deleteNoteButton.innerHTML = `&#x274C`;
-    //   recipeNotes[i].appendChild(deleteNoteButton)
-    // }
 
     //Attach event listeners to all deleteNoteButtons
     let buttons = document.getElementsByClassName("delete-button");
@@ -124,10 +112,7 @@ class Note {
         ul.appendChild(li);
 
         //Add delete button to that new note
-        let deleteNoteButton = document.createElement('button');
-        deleteNoteButton.classList.add("delete-button");
-        deleteNoteButton.innerHTML = `&#x274C`;
-        li.appendChild(deleteNoteButton)
+        note.addDeleteNoteButton(li);
 
         //Remove form from DOM
         let newNoteForms = document.getElementsByClassName("new-note-form")
@@ -135,5 +120,12 @@ class Note {
         mostRecent.parentNode.removeChild(mostRecent);
     });
   }//createNoteFromForm
+
+  addDeleteNoteButton(elt) {
+    let deleteNoteButton = document.createElement('button');
+    deleteNoteButton.classList.add("delete-button");
+    deleteNoteButton.innerHTML = `&#x274C`;
+    elt.appendChild(deleteNoteButton);
+  }//addDeleteNoteButton
 
 }//class Note
