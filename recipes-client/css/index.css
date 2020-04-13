@@ -127,3 +127,7 @@ input:focus {
 #recipe-form input[type="submit"]:hover {
   opacity: 1;
 }
+
+ul li {
+  padding: 5px;
+}

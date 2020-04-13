@@ -26,7 +26,7 @@ let getForm = () => document.getElementById('recipe-form')
 let getName = () => document.getElementById('name').value
 let getURL = () => document.getElementById('url').value
 let getImgURL = () => document.getElementById('img_url').value
-let getButtons = () => document.getElementsByClassName('add-note-btn')
+let getAddNoteButtons = () => document.getElementsByClassName('add-note-btn')
 
 function resetInput() {
   getName().value = '';

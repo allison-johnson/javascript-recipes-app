@@ -91,10 +91,13 @@ class Recipe {
     Recipe.all.forEach(recipe => recipe.render());
 
     //When clicked, button should generate new text field and submit button
-    let buttons = getButtons();
+    let buttons = getAddNoteButtons();
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener("click", function(e) {
-            Note.renderNoteForm(e);
+            //If parent HTML doesn't contain <form>
+            if(!e.target.parentNode.innerHTML.includes("</form")) {
+              Note.renderNoteForm(e);
+            }
         })
     }
   }//renderRecipes
