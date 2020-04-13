@@ -14,7 +14,6 @@ Substance
     * Use switch statements to execute an appropriate callback based on the target element of the click
 
 [] Check that validations work on front end 
-    [] Add titleCase method to rails Recipe class
 
 [] Recipes can be deleted
 
@@ -31,6 +30,8 @@ Questions
 1. After submitting new recipe, why do I have to refresh page in order for 'add recipe note' buttons to work???
 
 2. How to clear values from input boxes once recipe is submitted
+
+3. Why am I getting promise errors in console when I select input fields in new recipe form?
 
 3. How to center the entire grid of cards
 

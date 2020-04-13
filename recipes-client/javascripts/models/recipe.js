@@ -53,6 +53,9 @@ class Recipe {
         let recipe = new Recipe(data)
         recipe.render();
         resetInput();
+    })
+    .catch((error) => {
+      alert('Error:', error)
     });
   }//createFromForm (new recipe)
 

@@ -3,7 +3,7 @@ let addRecipe = false;
 document.addEventListener('DOMContentLoaded', function() {
   //This should send AJAX request to Rails side to fetch all recipes information
   Recipe.load();
-  getForm().addEventListener('click', Recipe.createFromForm);
+  getForm().getElementsByClassName("btn")[0].addEventListener('click', Recipe.createFromForm);
 
   const addBtn = document.querySelector("#new-recipe-btn");
   const recipeForm = document.querySelector("#recipe-form");
