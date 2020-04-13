@@ -94,7 +94,7 @@ class Recipe {
     let buttons = getAddNoteButtons();
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener("click", function(e) {
-            //If parent HTML doesn't contain <form>
+            //Only render one form, per recipe, at a time
             if(!e.target.parentNode.innerHTML.includes("</form")) {
               Note.renderNoteForm(e);
             }

@@ -1,9 +1,9 @@
 Substance
+[] Error handling: when user tries to submit blank note or a recipe that's missing a field...
+
 [] Add a like button to top right corner of card (see toy tale?)
 
 [] Weird issue with which notes are in Note.all array ... think about whether that array is even necessary? I never need to access all the notes, just all the notes of a specific recipe!
-
-[] Error handling: when user tries to submit blank note or a recipe that's missing a field...
 
 [] Why is refresh necessary after adding recipe in order to add any notes?
 
@@ -12,12 +12,6 @@ Substance
 [] Create an event controller that handles all clicks
     * Listen for clicks at the top level (document)
     * Use switch statements to execute an appropriate callback based on the target element of the click
-
-[] Button to add note to recipe
-    [x] Text box and submit button appear
-    [x] On submit, note gets added to recipe card 
-    [x] On submit, form gets destroyed
-    [] When add button is clicked, do nothing if parent element's HTML already contains <form>
 
 [] Check that validations work on front end 
     [] Add titleCase method to rails Recipe class
