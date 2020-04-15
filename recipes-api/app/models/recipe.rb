@@ -1,7 +1,8 @@
 class Recipe < ApplicationRecord
   has_many :notes
   
-  validates :name, presence: true
+  #validates :name, presence: true
+  validates :name, presence: {message: "required field"}
   validates :url, presence: true
   validates :url, uniqueness: true 
   validates :img_url, presence: true

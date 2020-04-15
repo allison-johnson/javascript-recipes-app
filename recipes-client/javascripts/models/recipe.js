@@ -50,12 +50,24 @@ class Recipe {
     //Get returned promise from AJAX call and add recipe to page
     API.post('/recipes', strongParams)
     .then(data => {
+        //console.log(data);
+        if (data.errors) {
+          debugger 
+          //use map and join to formulate a string from data.errors
+          let errorString = "";
+          for (const key in data.errors) {
+            errorString += data.errors[key];
+          }
+          throw new Error(errorString);
+          //throw new Error(data.errors.name[0])
+        }
         let recipe = new Recipe(data)
         recipe.render();
         resetInput();
     })
     .catch((error) => {
-      alert('Error:', error)
+      //debugger 
+      alert(`Error:, ${error.toString()}`)
     });
   }//createFromForm (new recipe)
 
@@ -87,6 +99,13 @@ class Recipe {
     addNoteButton.innerText = "Add a recipe note";
     addNoteButton.id = `add-note-btn-${this.id}`;
     document.getElementById(`card ${this.id}`).appendChild(addNoteButton);
+
+    //Add event listener to addNoteButton
+    addNoteButton.addEventListener("click", function(e){
+      if(!e.target.parentNode.innerHTML.includes("</form>")) {
+        Note.renderNoteForm(e);
+      }
+    })
   }//render (HTML template for recipe's card)
 
   //renders the HTML for ALL recipes

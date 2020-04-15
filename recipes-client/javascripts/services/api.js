@@ -22,7 +22,14 @@ class API {
       },
       body: JSON.stringify(data)
     })
-      .then(resp => resp.json())
+      .then(resp => {
+        return resp.json();
+        // if(!resp.ok) {
+        //   throw new Error(resp.json())
+        // } else {
+        //   return resp.json()
+        // }
+      })
   }//post
 
   static delete(url) {

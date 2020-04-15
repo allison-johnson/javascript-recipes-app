@@ -114,6 +114,8 @@ class Note {
         //Add delete button to that new note
         note.addDeleteNoteButton(li);
 
+        //Add event listener to delete button 
+
         //Remove form from DOM
         let newNoteForms = document.getElementsByClassName("new-note-form")
         let mostRecent = newNoteForms[newNoteForms.length-1];

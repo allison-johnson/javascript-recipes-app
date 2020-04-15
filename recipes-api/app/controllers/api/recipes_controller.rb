@@ -19,7 +19,8 @@ class Api::RecipesController < ApplicationController
     if recipe.save
       render json: recipe, include: [:notes], status: :created
     else
-      render json: recipe.errors, status: :unprocessable_entity
+     # render json: {recipe}
+      render json: {errors: recipe.errors}, status: :unprocessable_entity
     end
   end #create
 

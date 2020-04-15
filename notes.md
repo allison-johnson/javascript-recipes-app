@@ -1,11 +1,21 @@
 Substance
+[] Add error catch to enter recipe note form
+
+[] Can't get panes to appear
+
 [] Error handling: when user tries to submit blank note or a recipe that's missing a field...
+    * See API class static post method for an attempt
+
+[] Delete note:
+    [] Abstract funcitonality into a note.js instance method
+        [] Call that method right after a new note gets created (so that you can imediately delete note)
+    [] Confirmation before delete note
+
+[] What if image can't render or is invalid?
 
 [] Add a like button to top right corner of card (see toy tale?)
 
 [] Weird issue with which notes are in Note.all array ... think about whether that array is even necessary? I never need to access all the notes, just all the notes of a specific recipe!
-
-[] Why is refresh necessary after adding recipe in order to add any notes?
 
 [] Clear fields when form is submitted
 
@@ -27,11 +37,11 @@ Stretch Ideas
 [] Drag and drop recipes into a box (for now)? Then add a box for each day.
 
 Questions
-1. After submitting new recipe, why do I have to refresh page in order for 'add recipe note' buttons to work???
+1. Same thing, when I submit an note, delete button doesn't work right away?
 
 2. How to clear values from input boxes once recipe is submitted
 
-3. Why am I getting promise errors in console when I select input fields in new recipe form?
+3. Why can't I call resp.json() in delete fetch request?
 
 3. How to center the entire grid of cards
 
