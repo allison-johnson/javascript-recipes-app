@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
   for (let i = 0; i < days.length; i++) {
     days[i].addEventListener("drop", function(e) {
       e.preventDefault();
-      const data = e.dataTransfer.getData("text/plain");
+      let data = e.dataTransfer.getData("text/plain");
       debugger 
       let li = document.createElement('li');
       li.innerText = data;

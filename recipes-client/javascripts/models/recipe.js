@@ -74,7 +74,7 @@ class Recipe {
     return `
     <div class="card" id="card ${this.id}">
       <div class="card-content">
-        <img class="recipe-img" draggable="true" src="${this.img_url}" alt="${this.name}"/><br>
+        <img class="recipe-img" id="recipe-img-${this.id}" draggable="true" src="${this.img_url}" alt="${this.name}"/><br>
         <a href=${this.url} class="card-url">${this.name}</a>
         <ul class="recipe-notes" id="recipe-notes-${this.id}"></ul>
       </div>
@@ -114,8 +114,8 @@ class Recipe {
   }//render (HTML template for recipe's card)
 
   dragstartHandler(e) {
-    let recipeName = e.target.parentElement.getElementsByTagName('a')[0].innerText;
-    e.dataTransfer.setData("text/plain", recipeName);
+    //let recipeName = e.target.parentElement.getElementsByTagName('a')[0].innerText;
+    e.dataTransfer.setData("text/uri-list", e.target.id);
   }
 
   //renders the HTML for ALL recipes
