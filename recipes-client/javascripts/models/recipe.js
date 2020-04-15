@@ -74,7 +74,7 @@ class Recipe {
     return `
     <div class="card" id="card ${this.id}">
       <div class="card-content">
-        <img class="recipe-img" src="${this.img_url}" alt="${this.name}"/><br>
+        <img class="recipe-img" draggable="true" src="${this.img_url}" alt="${this.name}"/><br>
         <a href=${this.url} class="card-url">${this.name}</a>
         <ul class="recipe-notes" id="recipe-notes-${this.id}"></ul>
       </div>
@@ -85,6 +85,13 @@ class Recipe {
   //renders the HTML for a recipe's card
   render() {
     getRecipesList().innerHTML += this.template();
+
+    //Add dragstart handler to recipe's image
+    let images = getImages();
+    let lastImage = images[images.length-1];
+    lastImage.addEventListener("dragstart", function(e){
+      this.dragstartHandler(e);
+    });
 
     //Add notes to the recipe's card
     Note.addNotes(this);
@@ -105,6 +112,11 @@ class Recipe {
       }
     })
   }//render (HTML template for recipe's card)
+
+  dragstartHandler(e) {
+    let recipeName = e.target.parentElement.getElementsByTagName('a')[0].innerText;
+    e.dataTransfer.setData("text/plain", recipeName);
+  }
 
   //renders the HTML for ALL recipes
   static renderRecipes() {
