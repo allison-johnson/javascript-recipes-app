@@ -1,8 +1,7 @@
 Substance
-[] Can't get panes to appear
+[] Users and user auth
 
-[] Delete note:
-    [] Confirmation before delete note
+[] Can't get panes to appear
 
 [] Add a like button to top right corner of card (see toy tale?)
 
@@ -28,8 +27,6 @@ Stretch Ideas
 [] Drag and drop recipes into a box (for now)? Then add a box for each day.
 
 Questions
-1. Same thing, when I submit an note, delete button doesn't work right away?
-
 2. How to clear values from input boxes once recipe is submitted
 
 3. Why can't I call resp.json() in delete fetch request?
