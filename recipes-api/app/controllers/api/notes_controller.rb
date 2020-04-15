@@ -7,7 +7,7 @@ class Api::NotesController < ApplicationController
     if note.save
       render json: note, status: :created
     else
-      render json: note.errors, status: :unprocessable_entity 
+      render json: {errors: note.errors}, status: :unprocessable_entity 
     end
   end #create
 

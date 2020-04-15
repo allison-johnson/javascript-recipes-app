@@ -5,15 +5,12 @@ Substance
 
 [] Fix size of 'add recipe note' button 
 
-[] Error handling: when user tries to submit blank note or a recipe that's missing a field...
-    * See API class static post method for an attempt
+[] Error handling: when user tries to submit blank note 
 
 [] Delete note:
-    [] Abstract funcitonality into a note.js instance method
+    [] Abstract functionality into a note.js instance method
         [] Call that method right after a new note gets created (so that you can imediately delete note)
     [] Confirmation before delete note
-
-[] What if image can't render or is invalid?
 
 [] Add a like button to top right corner of card (see toy tale?)
 

@@ -50,17 +50,15 @@ class Recipe {
     //Get returned promise from AJAX call and add recipe to page
     API.post('/recipes', strongParams)
     .then(data => {
-        //console.log(data);
         if (data.errors) {
-          debugger 
-          //use map and join to formulate a string from data.errors
+          //Formulate a string from data.errors
           let errorString = "";
           for (const key in data.errors) {
             errorString += `${data.errors[key]}\n`;
           }
           throw new Error(errorString);
-          //throw new Error(data.errors.name[0])
         }
+        //If there were no errors, add create and render note on front end
         let recipe = new Recipe(data)
         recipe.render();
         resetInput();

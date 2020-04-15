@@ -24,11 +24,6 @@ class API {
     })
       .then(resp => {
         return resp.json();
-        // if(!resp.ok) {
-        //   throw new Error(resp.json())
-        // } else {
-        //   return resp.json()
-        // }
       })
   }//post
 

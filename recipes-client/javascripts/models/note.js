@@ -101,6 +101,14 @@ class Note {
 
     API.post('/notes', strongParams)
     .then(data => {
+        if (data.errors) {
+          //Formulate a string form data.errors
+          let errorString = "";
+          for (const key in data.errors) {
+            errorString += `${data.errors[key]}\n`;
+          }
+          throw new Error(errorString);
+        }
         //Add created note to correct recipe on front end
         let note = new Note(data);
         Recipe.all.find(recipe => recipe.id === note.recipe_id).notes.push(note);
@@ -120,7 +128,10 @@ class Note {
         let newNoteForms = document.getElementsByClassName("new-note-form")
         let mostRecent = newNoteForms[newNoteForms.length-1];
         mostRecent.parentNode.removeChild(mostRecent);
-    });
+    })
+    .catch((error) => {
+      alert(`${error.toString()}`)
+    })
   }//createNoteFromForm
 
   addDeleteNoteButton(elt) {

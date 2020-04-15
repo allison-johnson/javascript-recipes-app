@@ -1,5 +1,5 @@
 class Note < ApplicationRecord
   belongs_to :recipe
 
-  validates :content, presence: true
+  validates :content, presence: {message: "Note content required"}
 end #class
