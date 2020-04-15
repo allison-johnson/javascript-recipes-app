@@ -25,15 +25,27 @@ document.addEventListener('DOMContentLoaded', function() {
     })
   }//for
 
+  //Define what should happen when recipe gets "dropped" in
   for (let i = 0; i < days.length; i++) {
     days[i].addEventListener("drop", function(e) {
       e.preventDefault();
-      let data = e.dataTransfer.getData("text/plain");
-      debugger 
-      let li = document.createElement('li');
-      li.innerText = data;
-      let recipeList = e.target.getElementsByTagName('ul')[0];
-      recipeList.appendChild(li);
+      const id = e.dataTransfer.getData("text/plain");
+      const draggableElement = document.getElementById(id);
+      const dropzone = e.target;
+      //debugger 
+      //e.target.appendChild(draggableElement);
+      e.dataTransfer.clearData();
+
+      let nodeCopy = draggableElement.cloneNode(true);
+      nodeCopy.id = `new ${id}`;
+      e.target.appendChild(nodeCopy);
+      e.dataTransfer.clearData();
+      // let data = e.dataTransfer.getData("text/plain");
+      // debugger 
+      // let li = document.createElement('li');
+      // li.innerText = data;
+      // let recipeList = e.target.getElementsByTagName('ul')[0];
+      // recipeList.appendChild(li);
     })
   }//for
 
@@ -45,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //Can these be used by js classes?
 let getRecipesList = () => document.querySelector('div.recipes-list');
 let getImages = () => document.getElementsByTagName("img");
+let getCards = () => document.getElementsByClassName("card");
 let getForm = () => document.getElementById('recipe-form')
 let getName = () => document.getElementById('name').value
 let getURL = () => document.getElementById('url').value

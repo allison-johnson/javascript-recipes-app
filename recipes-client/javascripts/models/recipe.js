@@ -37,6 +37,7 @@ class Recipe {
     const name = getName();
     const url = getURL();
     const imgURL = getImgURL();
+    //debugger 
 
     //Formulate strong params to match Rails storng params
     let strongParams = {
@@ -72,7 +73,7 @@ class Recipe {
   //returns HTML template for a recipe's card
   template() {
     return `
-    <div class="card" id="card ${this.id}">
+    <div class="card" id="card ${this.id}" draggable="true">
       <div class="card-content">
         <img class="recipe-img" id="recipe-img-${this.id}" draggable="true" src="${this.img_url}" alt="${this.name}"/><br>
         <a href=${this.url} class="card-url">${this.name}</a>
@@ -87,11 +88,11 @@ class Recipe {
     getRecipesList().innerHTML += this.template();
 
     //Add dragstart handler to recipe's image
-    let images = getImages();
-    let lastImage = images[images.length-1];
-    lastImage.addEventListener("dragstart", function(e){
-      this.dragstartHandler(e);
-    });
+    // let images = getImages();
+    // let lastImage = images[images.length-1];
+    // lastImage.addEventListener("dragstart", function(e){
+    //   this.dragstartHandler(e);
+    // });
 
     //Add notes to the recipe's card
     Note.addNotes(this);
@@ -113,9 +114,10 @@ class Recipe {
     })
   }//render (HTML template for recipe's card)
 
-  dragstartHandler(e) {
+  static dragstartHandler(e) {
     //let recipeName = e.target.parentElement.getElementsByTagName('a')[0].innerText;
-    e.dataTransfer.setData("text/uri-list", e.target.id);
+    e.dataTransfer.setData("text/plain", e.target.id);
+    e.dataTransfer.dropEffect = "copy";
   }
 
   //renders the HTML for ALL recipes
@@ -131,6 +133,15 @@ class Recipe {
               Note.renderNoteForm(e);
             }
         })
+    }
+
+    //Add dragstart handlers to all recipe cards id="card ${this.id}"
+    let allCards = getCards();
+    //debugger 
+    for (let i = 0; i < allCards.length; i++) {
+      allCards[i].addEventListener("dragstart", function(e) {
+        Recipe.dragstartHandler(e)
+      })
     }
   }//renderRecipes
 
