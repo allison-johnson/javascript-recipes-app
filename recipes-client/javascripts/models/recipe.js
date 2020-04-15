@@ -56,7 +56,7 @@ class Recipe {
           //use map and join to formulate a string from data.errors
           let errorString = "";
           for (const key in data.errors) {
-            errorString += data.errors[key];
+            errorString += `${data.errors[key]}\n`;
           }
           throw new Error(errorString);
           //throw new Error(data.errors.name[0])
@@ -67,7 +67,7 @@ class Recipe {
     })
     .catch((error) => {
       //debugger 
-      alert(`Error:, ${error.toString()}`)
+      alert(`${error.toString()}`)
     });
   }//createFromForm (new recipe)
 
@@ -76,7 +76,7 @@ class Recipe {
     return `
     <div class="card" id="card ${this.id}">
       <div class="card-content">
-        <img class="recipe-img" src="${this.img_url}"/><br>
+        <img class="recipe-img" src="${this.img_url}" alt="${this.name}"/><br>
         <a href=${this.url} class="card-url">${this.name}</a>
         <ul class="recipe-notes" id="recipe-notes-${this.id}"></ul>
       </div>

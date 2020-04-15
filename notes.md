@@ -3,6 +3,8 @@ Substance
 
 [] Can't get panes to appear
 
+[] Fix size of 'add recipe note' button 
+
 [] Error handling: when user tries to submit blank note or a recipe that's missing a field...
     * See API class static post method for an attempt
 

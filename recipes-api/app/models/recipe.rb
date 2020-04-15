@@ -2,10 +2,10 @@ class Recipe < ApplicationRecord
   has_many :notes
   
   #validates :name, presence: true
-  validates :name, presence: {message: "required field"}
-  validates :url, presence: true
-  validates :url, uniqueness: true 
-  validates :img_url, presence: true
+  validates :name, presence: {message: "Recipe name required"}
+  validates :url, presence: {message: "Recipe URL required"}
+  validates :url, uniqueness: {message: "Recipe already in database"}
+  validates :img_url, presence: {message: "Image URL required"}
 
   before_validation :make_title_case
 
