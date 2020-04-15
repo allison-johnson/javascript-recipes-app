@@ -29,37 +29,42 @@ class Note {
     let buttons = document.getElementsByClassName("delete-button");
     for (let i = 0; i < buttons.length; i++) {
       buttons[i].addEventListener('click', function(e){
-        //Find id of the note
-        let noteContent = e.target.parentElement.innerText;
-        let noteContentLen = noteContent.length; 
-        noteContent = noteContent.slice(0, noteContentLen-1);
-
-        let targetNote = Note.all.find(note => note.content === noteContent);
-        let targetRecipe = Recipe.all.find(recipe => recipe.id === targetNote.recipe_id);
-        let targetIndex = Note.all.indexOf(targetNote);
-        let noteId = targetNote.id;
-
-        //Send delete fetch request to backend
-        API.delete(`/notes/${noteId}`)
-        .then(text => {
-          //Removes deleted note from that recipe's recipe.notes array
-          let indexOfNoteInRecipeNotes = targetRecipe.notes.indexOf(targetNote);
-          targetRecipe.notes = targetRecipe.notes.slice(0, indexOfNoteInRecipeNotes).concat(targetRecipe.notes.slice(indexOfNoteInRecipeNotes+1))
-          
-          //Clear recipe notes for that recipe
-          document.getElementById(`recipe-notes-${targetRecipe.id}`).innerHTML = "";
-
-          //Call Note.addNotes(targetRecipe)
-          Note.addNotes(targetRecipe);
-        })
-
+        Note.deleteNote(e);
       })//addEventListener
     }//for
-
   }//addNotes
 
+  static deleteNote(e) {
+    //e is the event corresponding to clicking a 'delete note' button
+    let result = confirm("Are you sure you want to delete this note?")
+    if (result) {
+      //Find id of the note
+      let noteContent = e.target.parentElement.innerText;
+      let noteContentLen = noteContent.length; 
+      noteContent = noteContent.slice(0, noteContentLen-1);
+
+      let targetNote = Note.all.find(note => note.content === noteContent);
+      let targetRecipe = Recipe.all.find(recipe => recipe.id === targetNote.recipe_id);
+      let targetIndex = Note.all.indexOf(targetNote);
+      let noteId = targetNote.id;
+
+      //Send delete fetch request to backend
+      API.delete(`/notes/${noteId}`)
+      .then(text => {
+        //Removes deleted note from that recipe's recipe.notes array
+        let indexOfNoteInRecipeNotes = targetRecipe.notes.indexOf(targetNote);
+        targetRecipe.notes = targetRecipe.notes.slice(0, indexOfNoteInRecipeNotes).concat(targetRecipe.notes.slice(indexOfNoteInRecipeNotes+1))
+        
+        //Clear recipe notes for that recipe
+        document.getElementById(`recipe-notes-${targetRecipe.id}`).innerHTML = "";
+
+        //Call Note.addNotes(targetRecipe)
+        Note.addNotes(targetRecipe);
+      })
+    }//if
+  }//deleteNote 
+
   static renderNoteForm(e) {
-    //e.target.parentNode
     e.target.parentNode.insertAdjacentHTML("beforeend", `
      <form class="new-note-form">
        <label for="note">Enter recipe note: </label>
@@ -122,8 +127,6 @@ class Note {
         //Add delete button to that new note
         note.addDeleteNoteButton(li);
 
-        //Add event listener to delete button 
-
         //Remove form from DOM
         let newNoteForms = document.getElementsByClassName("new-note-form")
         let mostRecent = newNoteForms[newNoteForms.length-1];
@@ -139,6 +142,12 @@ class Note {
     deleteNoteButton.classList.add("delete-button");
     deleteNoteButton.innerHTML = `&#x274C`;
     elt.appendChild(deleteNoteButton);
+
+    //Add event listener to delete button 
+    deleteNoteButton.addEventListener("click", function(e) {
+      Note.deleteNote(e);
+    })
+
   }//addDeleteNoteButton
 
 }//class Note

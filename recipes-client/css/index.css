@@ -52,6 +52,7 @@ body {
 
 .card {
   text-align: center;
+  /*position:relative;*/
   border: grey solid 1px;
   padding: 1rem;
   width: 25rem;
@@ -84,10 +85,14 @@ ul {
 
 .add-note-btn {
   background-color: #4CAF50;
+  /*position:absolute;
+  right: 0;
+  top: 390px;*/
   font-size: 1rem;
   border-radius: 8px;
   opacity: 0.8;
   width: 150px;
+  height: 40px;
   margin-left: 60%;
 }
 

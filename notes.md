@@ -1,15 +1,7 @@
 Substance
-[] Add error catch to enter recipe note form
-
 [] Can't get panes to appear
 
-[] Fix size of 'add recipe note' button 
-
-[] Error handling: when user tries to submit blank note 
-
 [] Delete note:
-    [] Abstract functionality into a note.js instance method
-        [] Call that method right after a new note gets created (so that you can imediately delete note)
     [] Confirmation before delete note
 
 [] Add a like button to top right corner of card (see toy tale?)
@@ -18,13 +10,13 @@ Substance
 
 [] Clear fields when form is submitted
 
+[] Recipes can be deleted (with a confirmation)
+
 [] Create an event controller that handles all clicks
     * Listen for clicks at the top level (document)
     * Use switch statements to execute an appropriate callback based on the target element of the click
 
-[] Check that validations work on front end 
 
-[] Recipes can be deleted
 
 Style
 [] Use custom fonts
