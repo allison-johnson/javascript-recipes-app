@@ -19,15 +19,11 @@ Substance
 
 Style
 [] Use custom fonts
-[] Center grid of cards
 [] Play around with existing card templates
 
 Stretch Ideas
+[] Save daily menus when save button pressed 
 [] Add categories and then group recipes by category
-
-[] Drag and drop recipes into a box (for now)? Then add a box for each day.
-    *Question 1* How to setData as the string I want, not the image url?
-    *Question 2* Apparently it's not common to drag and drop an image directly ... so maybe I should instead drag the recipe card? Even so, how do I set the data to the name of the recipe (and also maybe its URL)?
 
 Questions
 2. How to clear values from input boxes once recipe is submitted

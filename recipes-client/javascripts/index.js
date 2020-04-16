@@ -36,23 +36,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
       //Get element where it's being dropped
       const dropzone = e.target;
+      console.log(e.target)
 
       //Make a copy of the dragged element and give it its own ID
       let nodeCopy = draggableElement.cloneNode(true);
       nodeCopy.id = `new card ${id}`;
       
+      //Find recipe name and create a list item with it
       let recipeName = nodeCopy.querySelector('a').innerText
       let li = document.createElement('li')
       li.innerText = recipeName
-      //debugger 
+
+      //Append the new list item to the selected daily menu
       e.target.querySelector("ul").appendChild(li);
       e.dataTransfer.clearData();
-      // let data = e.dataTransfer.getData("text/plain");
-      // debugger 
-      // let li = document.createElement('li');
-      // li.innerText = data;
-      // let recipeList = e.target.getElementsByTagName('ul')[0];
-      // recipeList.appendChild(li);
     })
   }//for
 
