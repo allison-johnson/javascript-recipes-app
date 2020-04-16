@@ -59,9 +59,10 @@ class Recipe {
           }
           throw new Error(errorString);
         }
-        //If there were no errors, add create and render note on front end
+        //If there were no errors, add recipe and render note on front end
         let recipe = new Recipe(data)
         recipe.render();
+        debugger 
         resetInput();
     })
     .catch((error) => {

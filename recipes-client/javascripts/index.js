@@ -43,9 +43,10 @@ document.addEventListener('DOMContentLoaded', function() {
       nodeCopy.id = `new card ${id}`;
       
       //Find recipe name and create a list item with it
-      let recipeName = nodeCopy.querySelector('a').innerText
-      let li = document.createElement('li')
-      li.innerText = recipeName
+      let recipeName = nodeCopy.querySelector('a').innerText;
+      let li = document.createElement('li');
+      li.innerText = recipeName;
+      li.classList.add("menu-item");
 
       //Append the new list item to the selected daily menu
       e.target.querySelector("ul").appendChild(li);
@@ -64,13 +65,16 @@ let getImages = () => document.getElementsByTagName("img");
 let getCards = () => document.getElementsByClassName("card");
 let getForm = () => document.getElementById('recipe-form')
 let getName = () => document.getElementById('name').value
+let getNameInput = () => document.getElementById('name')
 let getURL = () => document.getElementById('url').value
+let getURLInput = () => document.getElementById('url')
 let getImgURL = () => document.getElementById('img_url').value
+let getImgURLInput = () => document.getElementById('img_url')
 let getAddNoteButtons = () => document.getElementsByClassName('add-note-btn')
 let getDays = () => document.getElementsByClassName('daily-recipes')
 
 function resetInput() {
-  getName().value = '';
-  getURL().value = '';
-  getImgURL().value = '';
+  getNameInput().value = '';
+  getURLInput().value = '';
+  getImgURLInput().value = '';
 }
