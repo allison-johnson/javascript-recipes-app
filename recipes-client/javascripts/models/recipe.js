@@ -76,7 +76,7 @@ class Recipe {
     return `
     <div class="card" id="card ${this.id}" draggable="true">
       <div class="card-content">
-        <img class="recipe-img" id="recipe-img-${this.id}" draggable="true" src="${this.img_url}" alt="${this.name}"/><br>
+        <img class="recipe-img" id="recipe-img-${this.id}" src="${this.img_url}" alt="${this.name}"/><br>
         <a href=${this.url} class="card-url">${this.name}</a>
         <ul class="recipe-notes" id="recipe-notes-${this.id}"></ul>
       </div>

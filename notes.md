@@ -1,19 +1,9 @@
 Substance
-[] Users and user auth
+[] Make li's in daily menus draggable; when dragged into trash icons they should be deleted from that menu
 
-[] Can't get panes to appear
-
-[] Add a like button to top right corner of card (see toy tale?)
-
-[] Weird issue with which notes are in Note.all array ... think about whether that array is even necessary? I never need to access all the notes, just all the notes of a specific recipe!
-
-[] Clear fields when form is submitted
-
-[] Recipes can be deleted (with a confirmation)
-
-[] Create an event controller that handles all clicks
-    * Listen for clicks at the top level (document)
-    * Use switch statements to execute an appropriate callback based on the target element of the click
+[] Recipes can be deleted from a daily menu
+[] Weekly menu can be saved
+[] Recipes can be deleted from recipe box (with a confirmation)
 
 
 
@@ -24,6 +14,11 @@ Style
 Stretch Ideas
 [] Save daily menus when save button pressed 
 [] Add categories and then group recipes by category
+[] Allow user to type notes into a daily menu ("steamed broccoli")
+[] Users and user auth
+[] Create an event controller that handles all clicks
+    * Listen for clicks at the top level (document)
+    * Use switch statements to execute an appropriate callback based on the target element of the click
 
 Questions
 2. How to clear values from input boxes once recipe is submitted
@@ -35,4 +30,6 @@ Questions
 4. Why can't you attach event listeners iteratively? (i.e., need to wait until ALL delete buttons are created before adding event listeners to ALL of them, rather than attaching the listener to each one right after it is created)
 
 5. How can I turn this into a multi page application? Say, with a nav bar for "recipe box", "weekly menu", etc.? Do you need more than one .html file?
+
+6. Weird issue with which notes are in Note.all array ... think about whether that array is even necessary? I never need to access all the notes, just all the notes of a specific recipe!
 

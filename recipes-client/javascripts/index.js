@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       //Get element where it's being dropped
       const dropzone = e.target;
-      console.log(e.target)
+      //console.log(e.target)
 
       //Make a copy of the dragged element and give it its own ID
       let nodeCopy = draggableElement.cloneNode(true);
@@ -46,32 +46,63 @@ document.addEventListener('DOMContentLoaded', function() {
       let recipeName = nodeCopy.querySelector('a').innerText;
       let li = document.createElement('li');
       li.innerText = recipeName;
+      li.setAttribute("draggable", "true");
       li.classList.add("menu-item");
 
       //Append the new list item to the selected daily menu
       e.target.querySelector("ul").appendChild(li);
+      li.id = `${e.target.querySelector("ul").id} ${recipeName}`;
+
+      //Define event listener on the recipe li for when it gets dragged (to trash)
+      li.addEventListener("dragstart", function(e) {
+        dragstartHandler(e);
+      })
+
       e.dataTransfer.clearData();
     })
   }//for
 
+  //Tell trash icons what to do when a recipe li is dragged over
+  let trashIcons = getTrashIcons();
+  for (let i = 0; i < trashIcons.length; i++) {
+    trashIcons[i].addEventListener("dragover", function(e) {
+      e.preventDefault();
+      e.target.setAttribute("style", "opacity: 1;")
+    })
+  }//for
+
+  //Tell trash icons what to do when a recipe li is dropped in
+  trashIcons = getTrashIcons();
+  for (let i = 0; i < trashIcons.length; i++) {
+    trashIcons[i].addEventListener("drop", function(e) {
+      e.preventDefault();
+      const id = e.dataTransfer.getData("text/plain");
+      const draggableElement = document.getElementById(id);
+      draggableElement.remove();
+      e.target.setAttribute("style", "opacity: 0.5;")
+      e.dataTransfer.clearData();
+    })
+  }//for
 })//DOMContentLoaded event listener 
 
-//let recipes = [];
+function dragstartHandler(e) {
+  e.dataTransfer.setData("text/plain", e.target.id);
+}
 
 //DOM Getters
-//Can these be used by js classes?
 let getRecipesList = () => document.querySelector('div.recipes-list');
 let getImages = () => document.getElementsByTagName("img");
 let getCards = () => document.getElementsByClassName("card");
-let getForm = () => document.getElementById('recipe-form')
-let getName = () => document.getElementById('name').value
-let getNameInput = () => document.getElementById('name')
-let getURL = () => document.getElementById('url').value
-let getURLInput = () => document.getElementById('url')
-let getImgURL = () => document.getElementById('img_url').value
-let getImgURLInput = () => document.getElementById('img_url')
-let getAddNoteButtons = () => document.getElementsByClassName('add-note-btn')
-let getDays = () => document.getElementsByClassName('daily-recipes')
+let getForm = () => document.getElementById('recipe-form');
+let getName = () => document.getElementById('name').value;
+let getNameInput = () => document.getElementById('name');
+let getURL = () => document.getElementById('url').value;
+let getURLInput = () => document.getElementById('url');
+let getImgURL = () => document.getElementById('img_url').value;
+let getImgURLInput = () => document.getElementById('img_url');
+let getAddNoteButtons = () => document.getElementsByClassName('add-note-btn');
+let getDays = () => document.getElementsByClassName('daily-recipes');
+let getTrashIcons = () => document.getElementsByClassName("fas fa-trash-alt");
 
 function resetInput() {
   getNameInput().value = '';
