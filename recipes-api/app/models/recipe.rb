@@ -1,7 +1,6 @@
 class Recipe < ApplicationRecord
   has_many :notes
   
-  #validates :name, presence: true
   validates :name, presence: {message: "Recipe name required"}
   validates :url, presence: {message: "Recipe URL required"}
   validates :url, uniqueness: {message: "Recipe already in database"}

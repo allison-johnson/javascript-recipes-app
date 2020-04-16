@@ -1,13 +1,13 @@
 Substance
-[] Make li's in daily menus draggable; when dragged into trash icons they should be deleted from that menu
-
-[] Recipes can be deleted from a daily menu
 [] Weekly menu can be saved
+    - Save button on front end triggers post request
+    - 
+[] Weekly menu can be cleared
 [] Recipes can be deleted from recipe box (with a confirmation)
 
 
-
 Style
+[] Daily menus: create cards for these (note paper background with handwriting font would be fun!) -- use flex styling as well
 [] Use custom fonts
 [] Play around with existing card templates
 

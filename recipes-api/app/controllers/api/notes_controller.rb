@@ -16,7 +16,7 @@ class Api::NotesController < ApplicationController
     set_note 
     @note.destroy 
     render json: {}, status: :no_content 
-  end #delete
+  end #destroy
 
   private
   #Only allow a trusted parameter "white list" through
