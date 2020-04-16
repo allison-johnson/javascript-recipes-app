@@ -29,16 +29,23 @@ document.addEventListener('DOMContentLoaded', function() {
   for (let i = 0; i < days.length; i++) {
     days[i].addEventListener("drop", function(e) {
       e.preventDefault();
+
+      //Get element that was dragged
       const id = e.dataTransfer.getData("text/plain");
       const draggableElement = document.getElementById(id);
-      const dropzone = e.target;
-      //debugger 
-      //e.target.appendChild(draggableElement);
-      e.dataTransfer.clearData();
 
+      //Get element where it's being dropped
+      const dropzone = e.target;
+
+      //Make a copy of the dragged element and give it its own ID
       let nodeCopy = draggableElement.cloneNode(true);
-      nodeCopy.id = `new ${id}`;
-      e.target.appendChild(nodeCopy);
+      nodeCopy.id = `new card ${id}`;
+      
+      let recipeName = nodeCopy.querySelector('a').innerText
+      let li = document.createElement('li')
+      li.innerText = recipeName
+      //debugger 
+      e.target.querySelector("ul").appendChild(li);
       e.dataTransfer.clearData();
       // let data = e.dataTransfer.getData("text/plain");
       // debugger 

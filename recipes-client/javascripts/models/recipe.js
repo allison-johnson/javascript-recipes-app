@@ -87,13 +87,6 @@ class Recipe {
   render() {
     getRecipesList().innerHTML += this.template();
 
-    //Add dragstart handler to recipe's image
-    // let images = getImages();
-    // let lastImage = images[images.length-1];
-    // lastImage.addEventListener("dragstart", function(e){
-    //   this.dragstartHandler(e);
-    // });
-
     //Add notes to the recipe's card
     Note.addNotes(this);
 
@@ -137,7 +130,6 @@ class Recipe {
 
     //Add dragstart handlers to all recipe cards id="card ${this.id}"
     let allCards = getCards();
-    //debugger 
     for (let i = 0; i < allCards.length; i++) {
       allCards[i].addEventListener("dragstart", function(e) {
         Recipe.dragstartHandler(e)
