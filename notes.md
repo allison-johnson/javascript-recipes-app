@@ -25,6 +25,23 @@ Columns:
 Substance
 [] Check that you can add a recipe note to ANY recipe directly after adding a new recipe
 
+[] New table: Days (name:string)
+    - has_many :recipes
+    - Recipe has_many :days
+    - Update front end associations, params, etc.
+    - Seed data for Days table
+    - When a recipe is dragged into a daily menu, update DOM only
+    - When 'save' button is clicked, send post request of the form
+        strong params = 
+        {
+            day: {
+                name: name
+                recipes: {
+                    
+                }
+            }
+        }
+
 [] Weekly menu can be saved
     - 'save changes' button clicked
     - iterate over li's

@@ -1,5 +1,7 @@
 class Recipe < ApplicationRecord
   has_many :notes
+  has_many :recipes_days 
+  has_many :days, through: :recipes_days 
   
   validates :name, presence: {message: "Recipe name required"}
   validates :url, presence: {message: "Recipe URL required"}
@@ -12,6 +14,6 @@ class Recipe < ApplicationRecord
     wordsArr = self.name.split(" ")
     newWordsArr = wordsArr.map{|word| word.capitalize()}
     self.name = newWordsArr.join(" ")
-  end
+  end #make_title_case 
 
-end
+end #class
