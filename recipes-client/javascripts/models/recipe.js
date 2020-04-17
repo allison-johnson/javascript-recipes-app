@@ -27,6 +27,7 @@ class Recipe {
         recipes.forEach(data => new Recipe(data))
         Recipe.renderRecipes();
     })
+    .finally(Day.load.bind(Day))
     .catch(errors => console.log(errors))
   }//load
 

@@ -2,7 +2,9 @@ let addRecipe = false;
 
 document.addEventListener('DOMContentLoaded', function() {
   //This should send AJAX request to Rails side to fetch all recipes information
+  //It will also load the daily menus AFTER all recipes have been loaded
   Recipe.load();
+
   getForm().getElementsByClassName("btn")[0].addEventListener('click', Recipe.createFromForm);
 
   const addBtn = document.querySelector("#new-recipe-btn");
