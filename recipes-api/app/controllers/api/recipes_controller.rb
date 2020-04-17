@@ -30,5 +30,4 @@ class Api::RecipesController < ApplicationController
     params.require(:recipe).permit(:name, :url, :img_url)
   end #recipe_params
 
-
 end #class 

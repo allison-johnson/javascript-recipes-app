@@ -26,10 +26,13 @@ Substance
 [] Check that you can add a recipe note to ANY recipe directly after adding a new recipe
 
 [] New table: Days (name:string)
-    - has_many :recipes
-    - Recipe has_many :days
-    - Update front end associations, params, etc.
-    - Seed data for Days table
+    [x] has_many :recipes
+    [x] Recipe has_many :days through recipes_days (likewise with Day and Recipe)
+    [] Create DaysController 
+    [] Update front end associations, params, etc.
+    [] On page load, load all daily menus from days table
+        [] Create days.js class on frontend 
+    [x] Seed data for Days table
     - When a recipe is dragged into a daily menu, update DOM only
     - When 'save' button is clicked, send post request of the form
         strong params = 
@@ -37,7 +40,7 @@ Substance
             day: {
                 name: name
                 recipes: {
-                    
+
                 }
             }
         }
