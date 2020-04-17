@@ -53,6 +53,9 @@ document.addEventListener('DOMContentLoaded', function() {
       e.target.querySelector("ul").appendChild(li);
       li.id = `${e.target.querySelector("ul").id} ${recipeName}`;
 
+      //Make scrollbar visible
+      e.target.style.overflow = "auto";
+
       //Define event listener on the recipe li for when it gets dragged (to trash)
       li.addEventListener("dragstart", function(e) {
         dragstartHandler(e);

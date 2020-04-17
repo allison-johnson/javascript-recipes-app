@@ -11,7 +11,7 @@ class Api::MenuItemsController < ApplicationController
     end
   end #create
 
-  #Will need an update action
+  #Will need an update action??? Maybe not...
 
   #DELETE
   def destroy

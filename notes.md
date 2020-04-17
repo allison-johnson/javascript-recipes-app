@@ -1,8 +1,42 @@
+Day
+    - name ("Monday", "Tuesday")
+    - seeded (I decide all the records in that table)
+    - has_many recipes
+
+Recipe
+    - has_many days
+
+DaysRecipes
+belongs_to day
+belongs_to recipe
+
+
+
+MenuItem table
+Columns: 
+    - day (string; Monday, Tuesday,, ...)
+    - recipe_name
+
+{day: "Monday", recipe_name: "bcf"}
+{day: "Monday", recipe_name: "salad"}
+{day: "Tuesday", recipe_name: "bcf"}
+
+
 Substance
+[] Check that you can add a recipe note to ANY recipe directly after adding a new recipe
+
 [] Weekly menu can be saved
-    - Save button on front end triggers post request
-    - 
-[] Weekly menu can be cleared
+    - 'save changes' button clicked
+    - iterate over li's
+        - send post request to rails
+        - if a menu item with that day/recipe_name is not in table, create a new menu item record
+            - could also do this using uniqueness validator, but presumably everytime you try to update a weekly menu by saving it, MOST menu items would fail that uniqueness validation, and that seems like a lot of error handling
+            - 
+
+[] On page load, load all menu items from MenuItem table and place them in the correct day's recipe list
+
+[] Weekly menu can be cleared with confirmation (deletes all records from MenuItem table and clears those nodes from the DOM)
+
 [] Recipes can be deleted from recipe box (with a confirmation)
 
 
@@ -13,7 +47,7 @@ Style
 
 Stretch Ideas
 [] Save daily menus when save button pressed 
-[] Add categories and then group recipes by category
+[] Add categories and then group recipes by category (maybe a categories sidebar, recipes expand when category hovered over?)
 [] Allow user to type notes into a daily menu ("steamed broccoli")
 [] Users and user auth
 [] Create an event controller that handles all clicks
