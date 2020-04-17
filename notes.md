@@ -30,10 +30,10 @@ Substance
     [x] Recipe has_many :days through recipes_days (likewise with Day and Recipe)
     [] Create DaysController 
     [] Update front end associations, params, etc.
-    [] On page load, load all daily menus from days table
-        [] Create days.js class on frontend 
+    [x] On page load, load all daily menus from days table
+        [x] Create days.js class on frontend 
     [x] Seed data for Days table
-    - When a recipe is dragged into a daily menu, update DOM only
+    [] When a recipe is dragged into a daily menu, update DOM only with 
     - When 'save' button is clicked, send post request of the form
         strong params = 
         {
