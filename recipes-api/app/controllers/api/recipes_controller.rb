@@ -9,8 +9,8 @@ class Api::RecipesController < ApplicationController
 
   #GET/recipes/1
   def show
-    recipe = Recipe.find_by(id: params[:id])
-    render json: recipe 
+    set_recipe 
+    render json: @recipe 
   end #show
 
   #POST/recipes
@@ -24,8 +24,19 @@ class Api::RecipesController < ApplicationController
     end
   end #create
 
+  #DELETE
+  def destroy
+    set_recipe 
+    @recipe.destroy
+    render json: {}, status: :no_content
+  end #destroy
+
   private
   #Only allow a trusted parameter "white list" through
+  def set_recipe
+    @recipe = Recipe.find_by(id: params[:id])
+  end #set_recipe
+
   def recipe_params
     params.require(:recipe).permit(:name, :url, :img_url)
   end #recipe_params

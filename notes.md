@@ -9,7 +9,6 @@ Substance
 
 [] Recipes can be deleted from recipe box (with a confirmation)
 
-
 Style
 [] Daily menus: create cards for these (note paper background with handwriting font would be fun!) -- use flex styling as well
 [] Use custom fonts

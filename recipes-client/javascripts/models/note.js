@@ -51,7 +51,7 @@ class Note {
       //Send delete fetch request to backend
       API.delete(`/notes/${noteId}`)
       .then(text => {
-        //Removes deleted note from that recipe's recipe.notes array
+        //Remove deleted note from that recipe's recipe.notes array
         let indexOfNoteInRecipeNotes = targetRecipe.notes.indexOf(targetNote);
         targetRecipe.notes = targetRecipe.notes.slice(0, indexOfNoteInRecipeNotes).concat(targetRecipe.notes.slice(indexOfNoteInRecipeNotes+1))
         
@@ -140,6 +140,7 @@ class Note {
   addDeleteNoteButton(elt) {
     let deleteNoteButton = document.createElement('button');
     deleteNoteButton.classList.add("delete-button");
+    //deleteNoteButton.innerHTML = '<i class="fas fa-times"></i>'
     deleteNoteButton.innerHTML = `&#x274C`;
     elt.appendChild(deleteNoteButton);
 

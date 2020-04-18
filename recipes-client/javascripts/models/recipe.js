@@ -76,6 +76,7 @@ class Recipe {
   template() {
     return `
     <div class="card" id="card ${this.id}" draggable="true">
+      <button class="delete-recipe-btn"><i class="fas fa-times"></i></button>
       <div class="card-content">
         <img class="recipe-img" id="recipe-img-${this.id}" src="${this.img_url}" alt="${this.name}"/><br>
         <a href=${this.url} class="card-url">${this.name}</a>
@@ -100,13 +101,6 @@ class Recipe {
     addNoteButton.innerText = "Add a recipe note";
     addNoteButton.id = `add-note-btn-${this.id}`;
     document.getElementById(`card ${this.id}`).appendChild(addNoteButton);
-
-    //Add event listener to addNoteButton
-    // addNoteButton.addEventListener("click", function(e){
-    //   if(!e.target.parentNode.innerHTML.includes("</form>")) {
-    //     Note.renderNoteForm(e);
-    //   }
-    // })
   }//render (HTML template for recipe's card)
 
   static addListenersToAddNoteButtons() {
@@ -131,6 +125,7 @@ class Recipe {
     Recipe.all.forEach(recipe => recipe.render());
 
     Recipe.addListenersToAddNoteButtons();
+    Recipe.addListenersToDeleteRecipeButtons();
 
     //When clicked, button should generate new text field and submit button
     let buttons = getAddNoteButtons();
@@ -151,5 +146,40 @@ class Recipe {
       })
     }
   }//renderRecipes
+
+  static addListenersToDeleteRecipeButtons() {
+    let deleteRecipeButtons = document.getElementsByClassName("delete-recipe-btn");
+    for (let i = 0; i < deleteRecipeButtons.length; i++) {
+      deleteRecipeButtons[i].addEventListener('click', function(e) {
+        Recipe.deleteRecipe(e);
+      })//addEventListener
+    }//for
+  }//addListenersToDeleteRecipeButtons
+
+  static deleteRecipe(e) {
+    //e is the event corresponding to clicking a 'delete recipe' button
+    let result = confirm("Are you sure you want to delete this recipe? This action cannot be undone!");
+    if (result) {
+      //Find id of the recipe (depending on whether technically clicked on ICON or on BUTTON)
+      let parentId = ""
+      if (e.target.tagName === "BUTTON") {
+        //Button clicked, so parent is the card itself
+        parentId = e.target.parentNode.id; 
+      } else {
+        //Icon clicked, so parent is the button and grandparent is the card
+        parentId = e.target.parentNode.parentNode.id; 
+      }
+      let parentIdArr = parentId.split(" ");
+      let recipeId = parentIdArr[1];
+      
+      //Send delete fetch request to backend
+      API.delete(`/recipes/${recipeId}`)
+        .then(text => {
+          //Remove deleted recipe from DOM
+          console.log("then of delete")
+          document.getElementById(`card ${recipeId}`).remove();
+        })
+    }//if
+  }//deleteRecipe
 
 }//class
