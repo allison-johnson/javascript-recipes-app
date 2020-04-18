@@ -7,5 +7,5 @@
 
 - Drag recipe cards into a weekly meal planner, allowing you to plan out your menu for an entire week.
 
-#Development
+# Development
 - The back end is built with Rails and serves JSON-formatted data to the front end, which is built with JS and uses HTML and CSS.
