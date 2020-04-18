@@ -63,8 +63,8 @@ class Recipe {
         //If there were no errors, add recipe and render note on front end
         let recipe = new Recipe(data)
         recipe.render();
-        debugger 
         resetInput();
+        Recipe.addListenersToAddNoteButtons();
     })
     .catch((error) => {
       //debugger 
@@ -102,12 +102,23 @@ class Recipe {
     document.getElementById(`card ${this.id}`).appendChild(addNoteButton);
 
     //Add event listener to addNoteButton
-    addNoteButton.addEventListener("click", function(e){
-      if(!e.target.parentNode.innerHTML.includes("</form>")) {
-        Note.renderNoteForm(e);
-      }
-    })
+    // addNoteButton.addEventListener("click", function(e){
+    //   if(!e.target.parentNode.innerHTML.includes("</form>")) {
+    //     Note.renderNoteForm(e);
+    //   }
+    // })
   }//render (HTML template for recipe's card)
+
+  static addListenersToAddNoteButtons() {
+    let addNoteButtons = document.getElementsByClassName("add-note-btn");
+    for (let i = 0; i < addNoteButtons.length; i++) {
+      addNoteButtons[i].addEventListener("click", function(e){
+        if(!e.target.parentNode.innerHTML.includes("</form>")) {
+          Note.renderNoteForm(e);
+        }
+      })
+    }
+  }//addListenersToAddNoteButtons 
 
   static dragstartHandler(e) {
     //let recipeName = e.target.parentElement.getElementsByTagName('a')[0].innerText;
@@ -118,6 +129,8 @@ class Recipe {
   //renders the HTML for ALL recipes
   static renderRecipes() {
     Recipe.all.forEach(recipe => recipe.render());
+
+    Recipe.addListenersToAddNoteButtons();
 
     //When clicked, button should generate new text field and submit button
     let buttons = getAddNoteButtons();

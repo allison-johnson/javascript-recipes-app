@@ -101,7 +101,6 @@ body, html {
   height: 12rem;
   width: auto;
   max-width: 100%;
-  /*object-fit: scale-down;*/
 }
 
 ul {
@@ -123,18 +122,28 @@ ul {
   margin-left: 60%;
 }
 
+.add-note-btn:hover {
+  opacity: 1;
+}
+
+#save-menus {
+  background-color: #4CAF50;
+  font-size: 1rem;
+  border-radius: 8px;
+  opacity: 0.8;
+  width: 150px;
+  height: 40px;
+  margin-left: 60%;
+}
+
+#save-menus:hover {
+  opacity: 1;
+}
+
 .fas.fa-trash-alt {
   font-size: 1.5rem;
   color: red;
   opacity: 0.5;
-  /*width: 50%;
-  height: 40px;
-  margin-left: auto;
-  margin-right: auto;*/
-}
-
-.add-note-btn:hover {
-  opacity: 1;
 }
 
 #new-recipe-btn {
@@ -177,9 +186,9 @@ ul {
   padding: 5px;
 }
 
-input:focus {
+#recipe-form input:focus {
   border: 4px solid green;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 #recipe-form label {
