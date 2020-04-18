@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   Recipe.load();
 
   getForm().getElementsByClassName("btn")[0].addEventListener('click', Recipe.createFromForm);
+  document.getElementById("save-menus").addEventListener('click', Day.saveChanges);
 
   const addBtn = document.querySelector("#new-recipe-btn");
   const recipeForm = document.querySelector("#recipe-form");

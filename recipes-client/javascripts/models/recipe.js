@@ -40,7 +40,7 @@ class Recipe {
     const imgURL = getImgURL();
     //debugger 
 
-    //Formulate strong params to match Rails storng params
+    //Formulate strong params to match Rails strong params
     let strongParams = {
         recipe: {
           name: name,

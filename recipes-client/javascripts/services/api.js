@@ -27,6 +27,23 @@ class API {
       })
   }//post
 
+  static patch(url, data) {
+    return fetch(this.baseURL + url, {
+      method: 'PATCH',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(resp => {
+        return resp.json();
+      })
+  }//patch
+
+  //LEFT OFF HERE. Use Melia's code to see how to call API.patch
+  //Then go back to day.js static saveChanges() method
+
   static delete(url) {
     return fetch(this.baseURL + url, {
       method: 'DELETE',

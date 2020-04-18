@@ -1,29 +1,13 @@
-Day
-    - name ("Monday", "Tuesday")
-    - seeded (I decide all the records in that table)
-    - has_many recipes
-
-Recipe
-    - has_many days
-
-DaysRecipes
-belongs_to day
-belongs_to recipe
-
-
-
-MenuItem table
-Columns: 
-    - day (string; Monday, Tuesday,, ...)
-    - recipe_name
-
-{day: "Monday", recipe_name: "bcf"}
-{day: "Monday", recipe_name: "salad"}
-{day: "Tuesday", recipe_name: "bcf"}
-
-
 Substance
+[] DOM getter for UL's
+
 [] Check that you can add a recipe note to ANY recipe directly after adding a new recipe
+
+[] Alphabetize recipes
+
+[] Add recipe note button not working when a new recipe is submitted
+
+[] Weird console TypeErrors when recipe dragged into trash bin
 
 [] New table: Days (name:string)
     [x] has_many :recipes

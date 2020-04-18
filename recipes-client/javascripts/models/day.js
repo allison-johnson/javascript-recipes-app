@@ -4,6 +4,7 @@ class Day {
 
   constructor(data) {
     this.name = data.name;
+    this.id = data.id;
     this.recipes = [];
 
     //Populate the day's recipes array in the front end
@@ -68,6 +69,45 @@ class Day {
         document.getElementById(`${dayName}-menu`).parentElement.style.overflow = "auto";
     }
   }//render 
+
+  static saveChanges(e) {
+    console.log("Inside saveChanges")
+    //Iterate over all ul's
+    let dailyMenus = document.getElementsByClassName("daily-recipes")
+
+    for (let i = 0; i < dailyMenus.length; i++) {
+        let ul = dailyMenus[i].querySelector('ul');
+
+        //This ID also corresponds to ID of the Day record in the DB
+        let dayName = ul.id.split("-")[0];
+        dayName = dayName.slice(0,1).toUpperCase() + dayName.slice(1);
+        let dayId = Day.all.find(day => day.name === dayName).id
+
+        //recipeNames will hold the names of all recipes for that day
+        let dailyRecipes = ul.children
+        let recipeNames = [];
+
+        //For each ul, create an array of recipe names
+        for (let j = 0; j < dailyRecipes.length; j++) {
+            recipeNames.push(dailyRecipes[j].innerText);
+        }
+
+        //Formulate strong params to match Rails strong params
+        let strongParams = {
+            day: {
+                recipe_names: recipeNames
+            }
+        }
+
+        console.log("strongParams: ", strongParams)
+
+        //Make patch request to Rails with new recipes array for that day
+        API.patch(`/days/${dayId}`, strongParams)
+          .then(
+            console.log("inside then")
+          )
+    }//outer for 
+  }//saveChanges
 
 
 }//class
