@@ -43,7 +43,7 @@ class Day {
     Day.all.forEach(day => day.render());
 
     //Add dragstart handlers to all li's (to get dragged into trash can)
-    let dailyRecipeCards = document.getElementsByClassName("daily-recipes");
+    let dailyRecipeCards = getDailyRecipeCards();
     for (let i = 0; i < dailyRecipeCards.length; i++) {
         let ul = dailyRecipeCards[i].querySelector('ul');
         let listItems = ul.children

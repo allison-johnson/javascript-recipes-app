@@ -20,11 +20,22 @@ class Recipe {
     Recipe.all.push(this);
   }//save
 
+  static alphaByName(r1, r2) {
+    if (r1.name > r2.name) {
+      return 1;
+    }
+    if (r2.name > r1.name) {
+      return -1;
+    }
+    return 0;
+  }
+
   //sends AJAX call to Rails side to fetch all recipe information
   static load() {
     API.get('/recipes')
     .then(function(recipes){
         recipes.forEach(data => new Recipe(data))
+        Recipe.all.sort(Recipe.alphaByName)
         Recipe.renderRecipes();
     })
     .finally(Day.load.bind(Day))
@@ -65,6 +76,7 @@ class Recipe {
         recipe.render();
         resetInput();
         Recipe.addListenersToAddNoteButtons();
+        Recipe.addListenersToDeleteRecipeButtons();
     })
     .catch((error) => {
       //debugger 
@@ -104,7 +116,7 @@ class Recipe {
   }//render (HTML template for recipe's card)
 
   static addListenersToAddNoteButtons() {
-    let addNoteButtons = document.getElementsByClassName("add-note-btn");
+    let addNoteButtons = getAddNoteButtons();
     for (let i = 0; i < addNoteButtons.length; i++) {
       addNoteButtons[i].addEventListener("click", function(e){
         if(!e.target.parentNode.innerHTML.includes("</form>")) {
@@ -115,7 +127,6 @@ class Recipe {
   }//addListenersToAddNoteButtons 
 
   static dragstartHandler(e) {
-    //let recipeName = e.target.parentElement.getElementsByTagName('a')[0].innerText;
     e.dataTransfer.setData("text/plain", e.target.id);
     e.dataTransfer.dropEffect = "copy";
   }
@@ -148,7 +159,7 @@ class Recipe {
   }//renderRecipes
 
   static addListenersToDeleteRecipeButtons() {
-    let deleteRecipeButtons = document.getElementsByClassName("delete-recipe-btn");
+    let deleteRecipeButtons = getdeleteRecipeButtons();
     for (let i = 0; i < deleteRecipeButtons.length; i++) {
       deleteRecipeButtons[i].addEventListener('click', function(e) {
         Recipe.deleteRecipe(e);

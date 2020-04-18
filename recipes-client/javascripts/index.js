@@ -99,6 +99,7 @@ function dragstartHandler(e) {
 let getRecipesList = () => document.querySelector('div.recipes-list');
 let getImages = () => document.getElementsByTagName("img");
 let getCards = () => document.getElementsByClassName("card");
+
 let getForm = () => document.getElementById('recipe-form');
 let getName = () => document.getElementById('name').value;
 let getNameInput = () => document.getElementById('name');
@@ -106,7 +107,12 @@ let getURL = () => document.getElementById('url').value;
 let getURLInput = () => document.getElementById('url');
 let getImgURL = () => document.getElementById('img_url').value;
 let getImgURLInput = () => document.getElementById('img_url');
+
+let getDailyRecipeCards = () => document.getElementsByClassName("daily-recipes");
 let getAddNoteButtons = () => document.getElementsByClassName('add-note-btn');
+let getNewNoteForms = () => document.getElementsByClassName('new-note-form');
+let getdeleteRecipeButtons = () => document.getElementsByClassName("delete-recipe-btn");
+let getDeleteNoteButtons = () => document.getElementsByClassName("delete-button");
 let getDays = () => document.getElementsByClassName('daily-recipes');
 let getTrashIcons = () => document.getElementsByClassName("fas fa-trash-alt");
 
@@ -115,3 +121,4 @@ function resetInput() {
   getURLInput().value = '';
   getImgURLInput().value = '';
 }
+

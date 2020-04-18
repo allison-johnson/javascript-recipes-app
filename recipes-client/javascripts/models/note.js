@@ -26,9 +26,9 @@ class Note {
     })
 
     //Attach event listeners to all deleteNoteButtons
-    let buttons = document.getElementsByClassName("delete-button");
-    for (let i = 0; i < buttons.length; i++) {
-      buttons[i].addEventListener('click', function(e){
+    let deleteNotebuttons = getDeleteNoteButtons();
+    for (let i = 0; i < deleteNotebuttons.length; i++) {
+      deleteNotebuttons[i].addEventListener('click', function(e){
         Note.deleteNote(e);
       })//addEventListener
     }//for
@@ -73,8 +73,8 @@ class Note {
      </form>
     `);
 
-    let allNewNoteForms = document.getElementsByClassName("new-note-form");
-    let lastNewNoteForm = allNewNoteForms.item(allNewNoteForms.length-1);
+    let newNoteForms = getNewNoteForms();
+    let lastNewNoteForm = newNoteForms.item(newNoteForms.length-1);
 
     lastNewNoteForm.addEventListener("submit", function(e){
         e.preventDefault();
